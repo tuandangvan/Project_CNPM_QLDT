@@ -14,7 +14,7 @@
 	<decorator name="teacher" page="giangvien.jsp">
 		<pattern>/giangvien*</pattern>
 	</decorator>
-	<decorator name="web" page="home.jsp">
+	<decorator name="web" page="Home.jsp">
 		<pattern>/*</pattern>
 	</decorator>
 </decorators>
