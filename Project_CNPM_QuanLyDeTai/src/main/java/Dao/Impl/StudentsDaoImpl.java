@@ -118,22 +118,25 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 
 	@Override
 	public StudentsModel findById(int id) {
-		String sql = "SELECT * FROM students WHERE id = ? ";
+		String sql = "SELECT * FROM students WHERE studentId = ? ";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				StudentsModel students = new StudentsModel();
+				StudentsModel student = new StudentsModel();
 
-//				studentser.setstudentsId(rs.getInt("studentsId"));
-//				studentser.setstudentsName(rs.getString(id));
-//				studentser.setstudentsId(rs.getInt("studentsId"));
-//				studentser.setCreatedAt(rs.getDate("createdAt"));
-//				studentser.setPrice(rs.getBigDecimal("price"));
+				student.setStudentId(rs.getInt("studentId"));
+				student.setStudentName(rs.getString("studentName"));
+				student.setGender(rs.getBoolean("gender"));
+				student.setBirth(rs.getDate("birth"));
+				student.setEmail(rs.getString("email"));
+				student.setPhone(rs.getString("phone"));
+				student.setAddress(rs.getString("address"));
+				student.setMajorId(rs.getInt("majorId"));
 				
-				return students;
+				return student;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -140,5 +140,49 @@ public class TopicDetailsDaoImpl extends DBConnection implements ITopicDetailsDa
 		}
 		return null;
 	}
+	@Override
+	public List<TopicDetailsModel> findTopicDetailByTopicId(int topicId) {
+		String sql = "select * from Topic, TopicDetails WHERE Topic.topicId=TopicDetails.topicId and Topic.topicId=?";
+		List<TopicDetailsModel> topicdetails = new ArrayList<TopicDetailsModel>();
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, topicId);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				TopicDetailsModel topicdetail = new TopicDetailsModel();
+
+				topicdetail.setId(rs.getInt("id"));
+				topicdetail.setTopicId(rs.getInt("topicId"));
+				topicdetail.setStudentId(rs.getInt("studentId"));
+				topicdetail.setLeader(rs.getBoolean("leader"));
+				topicdetail.setScores(rs.getFloat("scores"));
+				
+				topicdetails.add(topicdetail);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return topicdetails;
+	}
 	
+	@Override
+	public String findMajorNameByTopicDetail(int topicId) {
+		String sql = "select DISTINCT  Majors.majorName from Topic, TopicDetails, Students, Majors Where Topic.topicId=TopicDetails.topicId and TopicDetails.studentId=Students.studentId\r\n"
+				+ "and Students.majorId=Majors.majorId and TopicDetails.topicId=?";
+		List<TopicDetailsModel> topicdetails = new ArrayList<TopicDetailsModel>();
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, topicId);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				return rs.getString("majorName");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

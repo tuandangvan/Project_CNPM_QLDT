@@ -101,13 +101,8 @@ public class MajorsDaoImpl extends DBConnection implements IMajorsDao{
 			while (rs.next()) {
 				MajorsModel major = new MajorsModel();
 				
-//				majorser.setmajorsId(rs.getInt("majorsId"));
-//				majorser.setmajorsName(rs.getString(id));
-//				majorser.setmajorsId(rs.getInt("majorsId"));
-//				majorser.setBoolean(3, signup.getBoolean());
-//				majorser.setCreatedAt(rs.getDate("createdAt"));
-//				majorser.setPrice(rs.getBigDecimal("price"));
-				
+				major.setMajorId(rs.getInt("majorsId"));
+				major.setMajorName(rs.getString("majorName"));
 				majors.add(major);
 			}
 		} catch (Exception e) {
