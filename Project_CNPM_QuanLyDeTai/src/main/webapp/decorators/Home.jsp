@@ -18,7 +18,9 @@
 						<li><a href="/Home/Index">Home</a></li>
 
 					</ol>
-					<div class="panel panel-default">Xin chào bro</div>
+					<div class="panel panel-default">
+						<dec:body/>
+					</div>
 				</div>
 			</div>
 		</div>
