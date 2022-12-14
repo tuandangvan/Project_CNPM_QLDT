@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@include file="/common/taglib.jsp"%>
+<head>
+<title>HomePage</title>
+<%@include file="/common/link-css-js.jsp"%>
+</head>
+<body>
+
+	<%@include file="/common/header.jsp"%>
+	<%-- <%@include file="/common/nav.jsp"%> --%>
+	<div id="wrapper">
+		<div class="container">
+			<div class="row">
+				<%@include file="/common/menu_Home.jsp"%>
+				<div class="col-md-9">
+					<ol class="breadcrumb">
+						<li><a href="/Home/Index">Home</a></li>
+
+					</ol>
+					<div class="panel panel-default">Xin chào bro</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+		<%@include file="/common/footer.jsp"%>
+</body>
+</html>
