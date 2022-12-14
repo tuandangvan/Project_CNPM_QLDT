@@ -62,53 +62,74 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 
 	@Override
 	public SignUpModel get(int id) {
-		String sql = "SELECT * FROM signup WHERE username = ? ";
+		String sql = "select  startTime, signUpId,startTime,endTime,role , \r\n"
+				+ "YEAR(startTime) as yStart, MONTH(startTime) as mStart, DAY(startTime) as dStart,\r\n"
+				+ "YEAR(endTime) as yEnd, MONTH(endTime) as mEnd, DAY(endTime) as dEnd\r\n"
+				+ "from SignUp\r\n"
+				+ "where SignUp.signUpId =?\r\n"
+				+ "ORDER BY SignUp.startTime desc ";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				SignUpModel major = new SignUpModel();
-//				signuper.setsignupId(rs.getInt("signupId"));
-//				signuper.setsignupName(rs.getString(id));
-//				signuper.setsignupId(rs.getInt("signupId"));
-//				signuper.setBoolean(3, signup.getBoolean());
-//				signuper.setCreatedAt(rs.getDate("createdAt"));
-//				signuper.setPrice(rs.getBigDecimal("price"));
-		
-				return major;
+				SignUpModel signup = new SignUpModel();
+//				signup.setSignUpId(rs.getInt("signupId"));
+				signup.setStartTime(rs.getTimestamp("startTime"));
+				signup.setEndTime(rs.getTimestamp("endTime"));
+				signup.setRole(rs.getBoolean("role"));
+				signup.setdEnd(rs.getInt("dEnd"));
+				signup.setyEnd(rs.getInt("yEnd"));
+				signup.setmEnd(rs.getInt("mEnd"));
+				signup.setdStart(rs.getInt("dStart"));
+				signup.setyStart(rs.getInt("yStart"));
+				signup.setmStart(rs.getInt("mStart"));
+				
+				return signup;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+		
+	
+	
 	}
 
 	@Override
 	public List<SignUpModel> getAll() {
-		List<SignUpModel> signup= new ArrayList<SignUpModel>();
-		String sql = "SELECT * FROM signup";
+		List<SignUpModel> signups= new ArrayList<SignUpModel>();
+		String sql = "select signUpId,startTime,endTime,role , \r\n"
+				+ "YEAR(startTime) as yStart, MONTH(startTime) as mStart, DAY(startTime) as dStart,\r\n"
+				+ "YEAR(endTime) as yEnd, MONTH(endTime) as mEnd, DAY(endTime) as dEnd\r\n"
+				+ "from signup\r\n";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				SignUpModel major = new SignUpModel();
+				SignUpModel signup = new SignUpModel();
 				
-//				signuper.setsignupId(rs.getInt("signupId"));
-//				signuper.setsignupName(rs.getString(id));
-//				signuper.setsignupId(rs.getInt("signupId"));
-//				signuper.setBoolean(3, signup.getBoolean());
-//				signuper.setCreatedAt(rs.getDate("createdAt"));
-//				signuper.setPrice(rs.getBigDecimal("price"));
+				signup.setSignUpId(rs.getInt("signupId"));
+				signup.setStartTime(rs.getTimestamp("startTime"));
+				signup.setEndTime(rs.getTimestamp("endTime"));
+				signup.setRole(rs.getBoolean("role"));
+				signup.setdEnd(rs.getInt("dEnd"));
+				signup.setyEnd(rs.getInt("yEnd"));
+				signup.setmEnd(rs.getInt("mEnd"));
+				signup.setdStart(rs.getInt("dStart"));
+				signup.setyStart(rs.getInt("yStart"));
+				signup.setmStart(rs.getInt("mStart"));
 				
-				signup.add(major);
+				
+				
+				signups.add(signup);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return signup;
+		return signups;
 	}
 
 	@Override
@@ -128,6 +149,43 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 //				signuper.setCreatedAt(rs.getDate("createdAt"));
 //				signuper.setPrice(rs.getBigDecimal("price"));
 				
+				return signup;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public SignUpModel getTop() {
+		String sql = "select top(1) startTime, signUpId,startTime,endTime,role , \r\n"
+				+ "YEAR(startTime) as yStart, MONTH(startTime) as mStart, DAY(startTime) as dStart,\r\n"
+				+ "YEAR(endTime) as yEnd, MONTH(endTime) as mEnd, DAY(endTime) as dEnd\r\n"
+				+ "from SignUp\r\n"
+				+ "ORDER BY SignUp.startTime desc ";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				SignUpModel signup = new SignUpModel();
+//				signuper.setsignupId(rs.getInt("signupId"));
+//				signuper.setsignupName(rs.getString(id));
+//				signuper.setsignupId(rs.getInt("signupId"));
+//				signuper.setBoolean(3, signup.getBoolean());
+//				signuper.setCreatedAt(rs.getDate("createdAt"));
+//				signuper.setPrice(rs.getBigDecimal("price"));
+				
+				signup.setSignUpId(rs.getInt("signupId"));
+				signup.setStartTime(rs.getTimestamp("startTime"));
+				signup.setEndTime(rs.getTimestamp("endTime"));
+				signup.setRole(rs.getBoolean("role"));
+				signup.setdEnd(rs.getInt("dEnd"));
+				signup.setyEnd(rs.getInt("yEnd"));
+				signup.setmEnd(rs.getInt("mEnd"));
+				signup.setdStart(rs.getInt("dStart"));
+				signup.setyStart(rs.getInt("yStart"));
+				signup.setmStart(rs.getInt("mStart"));
 				return signup;
 			}
 		} catch (Exception e) {
