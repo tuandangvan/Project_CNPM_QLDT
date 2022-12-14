@@ -12,7 +12,7 @@
 		<pattern>/student*</pattern>
 	</decorator>
 	<decorator name="teacher" page="giangvien.jsp">
-		<pattern>/giangvien*</pattern>
+		<pattern>/teacher*</pattern>
 	</decorator>
 	<decorator name="web" page="Home.jsp">
 		<pattern>/*</pattern>
