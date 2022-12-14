@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
 
 import Connection.DBConnection;
 import Dao.ITopicDao;
@@ -67,22 +66,20 @@ public class TopicDaoImpl extends DBConnection implements ITopicDao{
 
 	@Override
 	public TopicModel get(int id) {
-		String sql = "SELECT * FROM topic WHERE username = ? ";
+		String sql = "SELECT * FROM Topic WHERE topicId = ? ";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				TopicModel major = new TopicModel();
-//				topicer.settopicId(rs.getInt("topicId"));
-//				topicer.settopicName(rs.getString(id));
-//				topicer.settopicId(rs.getInt("topicId"));
-//				topicer.setBoolean(3, signup.getBoolean());
-//				topicer.setCreatedAt(rs.getDate("createdAt"));
-//				topicer.setPrice(rs.getBigDecimal("price"));
+				TopicModel topic = new TopicModel();
+				topic.setTopicId(rs.getInt("topicId"));
+				topic.setTopicName(rs.getString("topicName"));
+				topic.setTeacherId(rs.getInt("teacherId"));
+				topic.setDetail(rs.getString("detail"));
 		
-				return major;
+				return topic;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,33 +89,31 @@ public class TopicDaoImpl extends DBConnection implements ITopicDao{
 
 	@Override
 	public List<TopicModel> getAll() {
-		List<TopicModel> topic= new ArrayList<TopicModel>();
-		String sql = "SELECT * FROM topic";
+		List<TopicModel> topics = new ArrayList<TopicModel>();
+		String sql = "SELECT * FROM Topic";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				TopicModel major = new TopicModel();
+				TopicModel topic = new TopicModel();
 				
-//				topicer.settopicId(rs.getInt("topicId"));
-//				topicer.settopicName(rs.getString(id));
-//				topicer.settopicId(rs.getInt("topicId"));
-//				topicer.setBoolean(3, signup.getBoolean());
-//				topicer.setCreatedAt(rs.getDate("createdAt"));
-//				topicer.setPrice(rs.getBigDecimal("price"));
+				topic.setTopicId(rs.getInt("topicId"));
+				topic.setTopicName(rs.getString("topicName"));
+				topic.setTeacherId(rs.getInt("teacherId"));
+				topic.setDetail(rs.getString("detail"));
 				
-				topic.add(major);
+				topics.add(topic);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return topic;
+		return topics;
 	}
 
 	@Override
 	public TopicModel findById(int id) {
-		String sql = "SELECT * FROM topic WHERE id = ? ";
+		String sql = "SELECT * FROM Topic WHERE topicId = ? ";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -126,13 +121,11 @@ public class TopicDaoImpl extends DBConnection implements ITopicDao{
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				TopicModel topic = new TopicModel();
-
-//				topicer.settopicId(rs.getInt("topicId"));
-//				topicer.settopicName(rs.getString(id));
-//				topicer.settopicId(rs.getInt("topicId"));
-//				topicer.setCreatedAt(rs.getDate("createdAt"));
-//				topicer.setPrice(rs.getBigDecimal("price"));
-				
+				topic.setTopicId(rs.getInt("topicId"));
+				topic.setTopicName(rs.getString("topicName"));
+				topic.setTeacherId(rs.getInt("teacherId"));
+				topic.setDetail(rs.getString("detail"));
+		
 				return topic;
 			}
 		} catch (Exception e) {

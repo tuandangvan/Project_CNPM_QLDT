@@ -8,6 +8,15 @@ public class SignUpModel {
 	private Timestamp startTime;
 	private Timestamp endTime;
 	private Boolean role;
+	
+	private int yStart;
+	private int mStart;
+	private int dStart;
+	
+	private int yEnd;
+	private int mEnd;
+	private int dEnd;
+	
 	public SignUpModel() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -43,6 +52,43 @@ public class SignUpModel {
 	public void setRole(Boolean role) {
 		this.role = role;
 	}
+	public int getyStart() {
+		return yStart;
+	}
+	public void setyStart(int yStart) {
+		this.yStart = yStart;
+	}
+	public int getmStart() {
+		return mStart;
+	}
+	public void setmStart(int mStart) {
+		this.mStart = mStart;
+	}
+	public int getdStart() {
+		return dStart;
+	}
+	public void setdStart(int dStart) {
+		this.dStart = dStart;
+	}
+	public int getyEnd() {
+		return yEnd;
+	}
+	public void setyEnd(int yEnd) {
+		this.yEnd = yEnd;
+	}
+	public int getmEnd() {
+		return mEnd;
+	}
+	public void setmEnd(int mEnd) {
+		this.mEnd = mEnd;
+	}
+	public int getdEnd() {
+		return dEnd;
+	}
+	public void setdEnd(int dEnd) {
+		this.dEnd = dEnd;
+	}
+
 	
 	
 }

@@ -123,7 +123,7 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 
 	@Override
 	public StudentsModel findById(int id) {
-		String sql = "SELECT * FROM Students WHERE studentId = ? ";
+		String sql = "SELECT * FROM students WHERE studentId = ? ";
 		try {
 			Connection conn = super.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);

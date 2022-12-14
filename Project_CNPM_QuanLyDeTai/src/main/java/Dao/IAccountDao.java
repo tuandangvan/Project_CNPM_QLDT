@@ -14,8 +14,8 @@ public interface IAccountDao {
 
 	AccountModel get(int id);
 
-	List<AccountModel> getAll();
-
 	AccountModel findById(int id);
+
+	List<AccountModel> getAll();
 
 }
