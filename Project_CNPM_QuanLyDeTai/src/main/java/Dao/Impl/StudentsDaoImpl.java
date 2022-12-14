@@ -36,14 +36,19 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 	
 	@Override
 	public void edit(StudentsModel students) {
-		String sql = "UPDATE  students SET studentsName=?, gender=?, birth=? email=?, phone=? WHERE studentsId=?";
+		String sql = "UPDATE Students SET studentName = ?, gender = ?, birth = ?, \r\n"
+				+ "phone = ?, address = ?\r\n"
+				+ "WHERE studentId = ?";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
-//			ps.setString(1, students.getstudentsName());
-//			ps.setBoolean(2, students.getGender());
-//			ps.setDate(3, students.getBirth());
-//			ps.setInt(6, students.getstudentsId());
+			ps.setString(1, students.getStudentName());
+			ps.setBoolean(2, students.getGender());
+			ps.setDate(3, students.getBirth());
+			ps.setString(4, students.getPhone());
+			ps.setString(5, students.getAddress());
+			
+			ps.setInt(6, students.getStudentId());
 			
 			ps.executeUpdate();
 		} catch (Exception e) {
@@ -120,22 +125,20 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 	public StudentsModel findById(int id) {
 		String sql = "SELECT * FROM students WHERE studentId = ? ";
 		try {
-			Connection con = super.getConnection();
-			PreparedStatement ps = con.prepareStatement(sql);
+			Connection conn = super.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				StudentsModel student = new StudentsModel();
-
-				student.setStudentId(rs.getInt("studentId"));
-				student.setStudentName(rs.getString("studentName"));
-				student.setGender(rs.getBoolean("gender"));
-				student.setBirth(rs.getDate("birth"));
-				student.setEmail(rs.getString("email"));
-				student.setPhone(rs.getString("phone"));
-				student.setAddress(rs.getString("address"));
-				student.setMajorId(rs.getInt("majorId"));
-				
+				StudentsModel student = new StudentsModel(
+						rs.getInt(1),
+						rs.getString(2),
+						rs.getBoolean(3),
+						rs.getDate(4),
+						rs.getString(5),
+						rs.getString(6),
+						rs.getString(7),
+						rs.getInt(8));
 				return student;
 			}
 		} catch (Exception e) {
