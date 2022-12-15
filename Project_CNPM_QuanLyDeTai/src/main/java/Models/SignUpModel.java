@@ -16,17 +16,22 @@ public class SignUpModel {
 	private int yEnd;
 	private int mEnd;
 	private int dEnd;
-	
 	public SignUpModel() {
 		super();
 	}
-	
-	public SignUpModel(int signUpId, Date startTime, Date endTime, Boolean role) {
+	public SignUpModel(int signUpId, Date startTime, Date endTime, Boolean role, int yStart, int mStart, int dStart,
+			int yEnd, int mEnd, int dEnd) {
 		super();
 		this.signUpId = signUpId;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.role = role;
+		this.yStart = yStart;
+		this.mStart = mStart;
+		this.dStart = dStart;
+		this.yEnd = yEnd;
+		this.mEnd = mEnd;
+		this.dEnd = dEnd;
 	}
 
 	public int getSignUpId() {
@@ -101,8 +106,6 @@ public class SignUpModel {
 	public void setdEnd(int dEnd) {
 		this.dEnd = dEnd;
 	}
-	
-
 	
 	
 }
