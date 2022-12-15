@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,16 +15,15 @@ import Dao.Impl.SignUpDaoImpl;
 import Models.SignUpModel;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = {"/home/HuongDanDangKy"})
-public class RegistrationInstructionsController extends HttpServlet{
-
+@WebServlet(urlPatterns = {"/home"})
+public class SearchController extends HttpServlet{
+	
 	ISignUpDao signUp = new SignUpDaoImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		SignUpModel sign = signUp.getTop();
-		req.setAttribute("sign",sign);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/RegistrationInstructions.jsp");
+		List<SignUpModel> signs = signUp.getAll();
+		req.setAttribute("signs",signs);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/home.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
