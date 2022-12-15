@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
 
 import Connection.DBConnection;
 import Dao.ISignUpDao;
@@ -19,8 +18,8 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setTimestamp(1, signup.getStartTime());
-			ps.setTimestamp(2, signup.getEndTime());
+			ps.setDate(1, signup.getStartTime());
+			ps.setDate(2, signup.getEndTime());
 			ps.setBoolean(3, signup.getRole());
 			ps.executeUpdate();
 		} catch (Exception e) {
@@ -74,19 +73,19 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				SignUpModel signup = new SignUpModel();
+//				SignUpModel signup = new SignUpModel();
 //				signup.setSignUpId(rs.getInt("signupId"));
-				signup.setStartTime(rs.getTimestamp("startTime"));
-				signup.setEndTime(rs.getTimestamp("endTime"));
-				signup.setRole(rs.getBoolean("role"));
-				signup.setdEnd(rs.getInt("dEnd"));
-				signup.setyEnd(rs.getInt("yEnd"));
-				signup.setmEnd(rs.getInt("mEnd"));
-				signup.setdStart(rs.getInt("dStart"));
-				signup.setyStart(rs.getInt("yStart"));
-				signup.setmStart(rs.getInt("mStart"));
+//				signup.setStartTime(rs.getTimestamp("startTime"));
+//				signup.setEndTime(rs.getTimestamp("endTime"));
+//				signup.setRole(rs.getBoolean("role"));
+//				signup.setdEnd(rs.getInt("dEnd"));
+//				signup.setyEnd(rs.getInt("yEnd"));
+//				signup.setmEnd(rs.getInt("mEnd"));
+//				signup.setdStart(rs.getInt("dStart"));
+//				signup.setyStart(rs.getInt("yStart"));
+//				signup.setmStart(rs.getInt("mStart"));
 				
-				return signup;
+//				return signup;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,22 +108,22 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				SignUpModel signup = new SignUpModel();
-				
-				signup.setSignUpId(rs.getInt("signupId"));
-				signup.setStartTime(rs.getTimestamp("startTime"));
-				signup.setEndTime(rs.getTimestamp("endTime"));
-				signup.setRole(rs.getBoolean("role"));
-				signup.setdEnd(rs.getInt("dEnd"));
-				signup.setyEnd(rs.getInt("yEnd"));
-				signup.setmEnd(rs.getInt("mEnd"));
-				signup.setdStart(rs.getInt("dStart"));
-				signup.setyStart(rs.getInt("yStart"));
-				signup.setmStart(rs.getInt("mStart"));
-				
-				
-				
-				signups.add(signup);
+//				SignUpModel signup = new SignUpModel();
+//				
+//				signup.setSignUpId(rs.getInt("signupId"));
+//				signup.setStartTime(rs.getTimestamp("startTime"));
+//				signup.setEndTime(rs.getTimestamp("endTime"));
+//				signup.setRole(rs.getBoolean("role"));
+//				signup.setdEnd(rs.getInt("dEnd"));
+//				signup.setyEnd(rs.getInt("yEnd"));
+//				signup.setmEnd(rs.getInt("mEnd"));
+//				signup.setdStart(rs.getInt("dStart"));
+//				signup.setyStart(rs.getInt("yStart"));
+//				signup.setmStart(rs.getInt("mStart"));
+//				
+//				
+//				
+//				signups.add(signup);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -176,17 +175,17 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 //				signuper.setCreatedAt(rs.getDate("createdAt"));
 //				signuper.setPrice(rs.getBigDecimal("price"));
 				
-				signup.setSignUpId(rs.getInt("signupId"));
-				signup.setStartTime(rs.getTimestamp("startTime"));
-				signup.setEndTime(rs.getTimestamp("endTime"));
-				signup.setRole(rs.getBoolean("role"));
-				signup.setdEnd(rs.getInt("dEnd"));
-				signup.setyEnd(rs.getInt("yEnd"));
-				signup.setmEnd(rs.getInt("mEnd"));
-				signup.setdStart(rs.getInt("dStart"));
-				signup.setyStart(rs.getInt("yStart"));
-				signup.setmStart(rs.getInt("mStart"));
-				return signup;
+//				signup.setSignUpId(rs.getInt("signupId"));
+//				signup.setStartTime(rs.getTimestamp("startTime"));
+//				signup.setEndTime(rs.getTimestamp("endTime"));
+//				signup.setRole(rs.getBoolean("role"));
+//				signup.setdEnd(rs.getInt("dEnd"));
+//				signup.setyEnd(rs.getInt("yEnd"));
+//				signup.setmEnd(rs.getInt("mEnd"));
+//				signup.setdStart(rs.getInt("dStart"));
+//				signup.setyStart(rs.getInt("yStart"));
+//				signup.setmStart(rs.getInt("mStart"));
+//				return signup;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
