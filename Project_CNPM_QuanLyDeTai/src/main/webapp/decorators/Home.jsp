@@ -23,9 +23,7 @@
 						<li><a href="/Home/Index">Home</a></li>
 
 					</ol>
-					<div class="panel panel-default">
-						<dec:body/>
-					</div>
+					<dec:body/>
 				</div>
 			</div>
 		</div>
