@@ -39,10 +39,10 @@
 			<div class="mb-3">
               <label for="email">Chuyên ngành</label>
               <c:if test="${student.majorId==1 }">
-              	<input type="major" class="form-control" disabled="disabled" id="major" placeholder="Chuyên ngành" value="Kĩ thuật dữ liệu">
+              	<input type="text" class="form-control" disabled="disabled" id="major" placeholder="Chuyên ngành" value="Kĩ thuật dữ liệu">
               </c:if>
               <c:if test="${student.majorId==2 }">
-              	<input type="major" class="form-control" disabled="disabled" id="major" placeholder="Chuyên ngành" value="Công nghệ thông tin">
+              	<input type="text" class="form-control" disabled="disabled" id="major" placeholder="Chuyên ngành" value="Công nghệ thông tin">
               </c:if>
             </div>
 

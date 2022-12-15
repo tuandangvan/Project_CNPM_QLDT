@@ -1,7 +1,7 @@
 package Models;
 
 import java.sql.Date;
-import java.sql.Timestamp;
+
 
 public class SignUpModel {
 	private int signUpId;
@@ -18,7 +18,6 @@ public class SignUpModel {
 	private int dEnd;
 	public SignUpModel() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public SignUpModel(int signUpId, Date startTime, Date endTime, Boolean role, int yStart, int mStart, int dStart,
 			int yEnd, int mEnd, int dEnd) {
@@ -34,6 +33,7 @@ public class SignUpModel {
 		this.mEnd = mEnd;
 		this.dEnd = dEnd;
 	}
+
 	public int getSignUpId() {
 		return signUpId;
 	}
@@ -58,43 +58,54 @@ public class SignUpModel {
 	public void setRole(Boolean role) {
 		this.role = role;
 	}
+
 	public int getyStart() {
 		return yStart;
 	}
+
 	public void setyStart(int yStart) {
 		this.yStart = yStart;
 	}
+
 	public int getmStart() {
 		return mStart;
 	}
+
 	public void setmStart(int mStart) {
 		this.mStart = mStart;
 	}
+
 	public int getdStart() {
 		return dStart;
 	}
+
 	public void setdStart(int dStart) {
 		this.dStart = dStart;
 	}
+
 	public int getyEnd() {
 		return yEnd;
 	}
+
 	public void setyEnd(int yEnd) {
 		this.yEnd = yEnd;
 	}
+
 	public int getmEnd() {
 		return mEnd;
 	}
+
 	public void setmEnd(int mEnd) {
 		this.mEnd = mEnd;
 	}
+
 	public int getdEnd() {
 		return dEnd;
 	}
+
 	public void setdEnd(int dEnd) {
 		this.dEnd = dEnd;
 	}
-	
 	
 	
 }
