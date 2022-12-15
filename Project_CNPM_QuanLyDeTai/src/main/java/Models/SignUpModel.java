@@ -5,8 +5,8 @@ import java.sql.Timestamp;
 
 public class SignUpModel {
 	private int signUpId;
-	private Timestamp startTime;
-	private Timestamp endTime;
+	private Date startTime;
+	private Date endTime;
 	private Boolean role;
 	
 	private int yStart;
@@ -16,17 +16,23 @@ public class SignUpModel {
 	private int yEnd;
 	private int mEnd;
 	private int dEnd;
-	
 	public SignUpModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public SignUpModel(int signUpId, Timestamp startTime, Timestamp endTime, Boolean role) {
+	public SignUpModel(int signUpId, Date startTime, Date endTime, Boolean role, int yStart, int mStart, int dStart,
+			int yEnd, int mEnd, int dEnd) {
 		super();
 		this.signUpId = signUpId;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.role = role;
+		this.yStart = yStart;
+		this.mStart = mStart;
+		this.dStart = dStart;
+		this.yEnd = yEnd;
+		this.mEnd = mEnd;
+		this.dEnd = dEnd;
 	}
 	public int getSignUpId() {
 		return signUpId;
@@ -34,16 +40,16 @@ public class SignUpModel {
 	public void setSignUpId(int signUpId) {
 		this.signUpId = signUpId;
 	}
-	public Timestamp getStartTime() {
+	public Date getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Timestamp startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
-	public Timestamp getEndTime() {
+	public Date getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Timestamp endTime) {
+	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
 	public Boolean getRole() {
@@ -88,7 +94,7 @@ public class SignUpModel {
 	public void setdEnd(int dEnd) {
 		this.dEnd = dEnd;
 	}
-
+	
 	
 	
 }

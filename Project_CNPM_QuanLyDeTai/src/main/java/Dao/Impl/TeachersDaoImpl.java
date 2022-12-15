@@ -118,22 +118,24 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao{
 
 	@Override
 	public TeachersModel findById(int id) {
-		String sql = "SELECT * FROM teachers WHERE id = ? ";
+		String sql = "SELECT * FROM teachers WHERE teacherId = ? ";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				TeachersModel teachers = new TeachersModel();
+				TeachersModel teacher = new TeachersModel();
 
-//				teacherser.setteachersId(rs.getInt("teachersId"));
-//				teacherser.setteachersName(rs.getString(id));
-//				teacherser.setteachersId(rs.getInt("teachersId"));
-//				teacherser.setCreatedAt(rs.getDate("createdAt"));
-//				teacherser.setPrice(rs.getBigDecimal("price"));
+				teacher.setTeacherId(rs.getInt("teacherId"));
+				teacher.setTeacherName(rs.getString("teacherName"));
+				teacher.setGender(rs.getBoolean("gender"));
+				teacher.setBirth(rs.getDate("birth"));
+				teacher.setEmail(rs.getString("email"));
+				teacher.setPhone(rs.getString("phone"));
+				teacher.setMajorId(rs.getInt("majorId"));
 				
-				return teachers;
+				return teacher;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

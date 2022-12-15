@@ -18,4 +18,8 @@ public interface ITopicDetailsDao {
 
 	TopicDetailsModel findById(int id);
 
+	List<TopicDetailsModel> findTopicDetailByTopicId(int topicId);
+
+	String findMajorNameByTopicDetail(int topicId);
+
 }

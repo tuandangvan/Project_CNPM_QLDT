@@ -4,13 +4,13 @@ public class TopicDetailsModel {
 	private int id ;
 	private int topicId;
 	private int studentId;
-	private boolean leader;
+	private Boolean leader;
 	private float Scores;
 	public TopicDetailsModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public TopicDetailsModel(int id, int topicId, int studentId, boolean leader, float scores) {
+	public TopicDetailsModel(int id, int topicId, int studentId, Boolean leader, float scores) {
 		super();
 		this.id = id;
 		this.topicId = topicId;
@@ -36,10 +36,10 @@ public class TopicDetailsModel {
 	public void setStudentId(int studentId) {
 		this.studentId = studentId;
 	}
-	public boolean isLeader() {
+	public Boolean getLeader() {
 		return leader;
 	}
-	public void setLeader(boolean leader) {
+	public void setLeader(Boolean leader) {
 		this.leader = leader;
 	}
 	public float getScores() {
