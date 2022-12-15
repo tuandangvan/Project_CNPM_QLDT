@@ -19,8 +19,8 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setTimestamp(1, signup.getStartTime());
-			ps.setTimestamp(2, signup.getEndTime());
+			ps.setDate(1, signup.getStartTime());
+			ps.setDate(2, signup.getEndTime());
 			ps.setBoolean(3, signup.getRole());
 			ps.executeUpdate();
 		} catch (Exception e) {
@@ -76,8 +76,8 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 			while (rs.next()) {
 				SignUpModel signup = new SignUpModel();
 //				signup.setSignUpId(rs.getInt("signupId"));
-				signup.setStartTime(rs.getTimestamp("startTime"));
-				signup.setEndTime(rs.getTimestamp("endTime"));
+				signup.setStartTime(rs.getDate("startTime"));
+				signup.setEndTime(rs.getDate("endTime"));
 				signup.setRole(rs.getBoolean("role"));
 				signup.setdEnd(rs.getInt("dEnd"));
 				signup.setyEnd(rs.getInt("yEnd"));
@@ -112,8 +112,8 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 				SignUpModel signup = new SignUpModel();
 				
 				signup.setSignUpId(rs.getInt("signupId"));
-				signup.setStartTime(rs.getTimestamp("startTime"));
-				signup.setEndTime(rs.getTimestamp("endTime"));
+				signup.setDate(rs.getTimestamp("startTime"));
+				signup.setDate(rs.getTimestamp("endTime"));
 				signup.setRole(rs.getBoolean("role"));
 				signup.setdEnd(rs.getInt("dEnd"));
 				signup.setyEnd(rs.getInt("yEnd"));
@@ -177,8 +177,8 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 //				signuper.setPrice(rs.getBigDecimal("price"));
 				
 				signup.setSignUpId(rs.getInt("signupId"));
-				signup.setStartTime(rs.getTimestamp("startTime"));
-				signup.setEndTime(rs.getTimestamp("endTime"));
+				signup.setStartTime(rs.getDate("startTime"));
+				signup.setEndTime(rs.getDate("endTime"));
 				signup.setRole(rs.getBoolean("role"));
 				signup.setdEnd(rs.getInt("dEnd"));
 				signup.setyEnd(rs.getInt("yEnd"));
