@@ -5,22 +5,12 @@ import java.sql.DriverManager;
  
 public class DBConnection {
 
-<<<<<<< HEAD
 	    // private final String serverName = "DESKTOP-IK5D1LO"; 
 	    // private final String dbName = "DangKyDeTai"; 
 	    // private final String portNumber = "1433";
 	    // private final String instance = "SQLEXPRESS";// MSSQLSERVER LEAVE THIS ONE EMPTY IF YOUR SQL IS A SINGLE INSTANCE 
 	    // private final String userID = "sa";
 	    // private final String password = "123456";
-=======
-	/*
-	 * private final String serverName = "DESKTOP-IK5D1LO"; private final String
-	 * dbName = "DangKyDeTai"; private final String portNumber = "1433"; private
-	 * final String instance = "SQLEXPRESS";// MSSQLSERVER LEAVE THIS ONE EMPTY IF
-	 * YOUR SQL IS A SINGLE INSTANCE private final String userID = "sa"; private
-	 * final String password = "123456";
-	 */
->>>>>>> 5f790847e08412ac44de002fc8582489f8c5eca6
 	 
 	private final String serverName = "VANTUAN";
 	private final String dbName = "QuanLyDeTai";
@@ -30,12 +20,12 @@ public class DBConnection {
 	private final String password = "12345";
 
 	
-	private final String serverName = "DESKTOP-8AGARKU";
-	private final String dbName = "QuanLyDeTai";
-	private final String portNumber = "1433";
-	private final String instance = "HUY";// MSSQLSERVER LEAVE THIS ONE EMPTY IF YOUR SQL IS A SINGLE INSTANCE
-	private final String userID = "sa";
-	private final String password = "huy";
+	// private final String serverName = "DESKTOP-8AGARKU";
+	// private final String dbName = "QuanLyDeTai";
+	// private final String portNumber = "1433";
+	// private final String instance = "HUY";// MSSQLSERVER LEAVE THIS ONE EMPTY IF YOUR SQL IS A SINGLE INSTANCE
+	// private final String userID = "sa";
+	// private final String password = "huy";
 
 
 
