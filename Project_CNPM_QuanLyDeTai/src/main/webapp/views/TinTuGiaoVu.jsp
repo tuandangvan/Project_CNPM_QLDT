@@ -84,7 +84,7 @@
 						<font
 							style="font-size: 14.6667px; background-color: transparent; text-align: center;">
 							Kết quả đăng ký chuyên ngành sẽ được thông báo trên website Khoa
-							CNTT vào ngày ${(sign.dEnd+10)%30}/${sign.mEnd+1}/${sign.yEnd}</font>
+							CNTT vào ngày ${sign.dEnd}/${sign.mEnd}/${sign.yEnd}</font>
 					</p>
 				</div>
 
