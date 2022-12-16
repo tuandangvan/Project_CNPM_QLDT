@@ -17,6 +17,8 @@ public interface ITeachersDao {
 	List<TeachersModel> getAll();
 
 	TeachersModel findById(int id);
+	
+	List<TeachersModel> getListSearh(String key , int idPage);
 
 	TeachersModel getByUser(String user);
 

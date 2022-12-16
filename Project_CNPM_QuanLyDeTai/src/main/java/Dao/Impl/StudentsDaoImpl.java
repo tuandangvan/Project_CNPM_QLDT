@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
 
 import Connection.DBConnection;
 import Dao.IStudentsDao;
@@ -149,6 +148,46 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 		return null;
 	}
 	
+	
+	public List<StudentsModel> getListSearh(String key, int idPage) {
+		List<StudentsModel> students= new ArrayList<StudentsModel>();
+		String sql = "DECLARE @value nvarchar(50)\r\n"
+				+ "set @value= N'%"+key+"%'\r\n"
+				+ "select distinct Students.studentId, Students.studentName, Students.phone, Students.email,\r\n"
+				+ "(select Majors.majorName from Majors where Majors.majorId = Students.majorId) as majorName,\r\n"
+				+ "(select Topic.topicName from Topic, TopicDetails\r\n"
+				+ "where TopicDetails.studentId = Students.studentId and TopicDetails.topicId=Topic.topicId) as topicName\r\n"
+				+ "from Students, Majors\r\n"
+				+ "where Students.studentName like @value or Students.studentId  like @value \r\n"
+				+ "or Students.phone like @value or majorName  like @value\r\n"
+				+ "ORDER BY Students.studentId\r\n"
+				+ "OFFSET (?-1)*10 ROWS\r\n"
+				+ "FETCH FIRST 10 ROWS ONLY";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, idPage);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				StudentsModel student = new StudentsModel();
+				
+				student.setStudentId(rs.getInt("studentId"));
+				student.setStudentName(rs.getString("studentName"));
+				student.setPhone(rs.getString("phone"));
+				student.setEmail(rs.getString("email"));
+				
+				student.setTopicName(rs.getString("topicName"));
+				student.setMajorName(rs.getString("majorName"));
+
+				
+				students.add(student);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return students;
+	}
+
 	@Override
 	public StudentsModel findStudentByEmail(String email) {
 		String sql = "SELECT * FROM students WHERE email = ? ";
@@ -227,3 +266,4 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 	}
 	
 }
+	

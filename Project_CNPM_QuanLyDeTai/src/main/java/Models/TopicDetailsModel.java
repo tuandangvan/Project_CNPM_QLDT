@@ -6,6 +6,8 @@ public class TopicDetailsModel {
 	private int studentId;
 	private Boolean leader;
 	private float Scores;
+	
+
 	public TopicDetailsModel() {
 		super();
 		// TODO Auto-generated constructor stub

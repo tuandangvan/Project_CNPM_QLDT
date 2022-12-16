@@ -35,6 +35,7 @@
             	</div>
 			</div>
 			<div class="mb-3">
+			<label for="major">Chuyên ngành</label>
               <select class="form-control" name="major">
               <c:forEach items="${lstMajor }" var="major">
               	<c:if test="${major.majorId==teacher.majorId }">

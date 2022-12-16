@@ -11,6 +11,7 @@ public class TeachersModel {
 	private String phone;
 	private int majorId;
 
+
 	// Của Huy
 	private String majorName;
 	private String topicName;
@@ -87,6 +88,7 @@ public class TeachersModel {
 	public void setMajorId(int majorId) {
 		this.majorId = majorId;
 	}
+
 
 	public String getMajorName() {
 		return majorName;

@@ -43,13 +43,30 @@
             	</div>
 			</div>
 			<div class="mb-3">
-              <label for="email">Chuyên ngành</label>
-              <c:if test="${student.majorId==1 }">
-              	<input type="major" class="form-control" disabled="disabled" id="major" placeholder="Chuyên ngành" value="Kĩ thuật dữ liệu">
-              </c:if>
-              <c:if test="${student.majorId==2 }">
-              	<input type="major" class="form-control" disabled="disabled" id="major" placeholder="Chuyên ngành" value="Công nghệ thông tin">
-              </c:if>
+              <label for="major">Chuyên ngành</label>
+              <select class="form-control" name="major" disabled="disabled">
+              <c:forEach items="${lstMajor }" var="major">
+              	<c:if test="${major.majorId==student.majorId }">
+              		<option value="${major.majorId }" selected>${major.majorName }</option>
+              	</c:if>
+              	<c:if test="${major.majorId!=student.majorId }">
+              		<option value="${major.majorId }">${major.majorName }</option>
+              	</c:if>
+              </c:forEach>
+              </select>
+            </div>
+            <div class="mb-3" hidden="hidden">
+              <label for="major">Chuyên ngành</label>
+              <select class="form-control" name="major" >
+              <c:forEach items="${lstMajor }" var="major">
+              	<c:if test="${major.majorId==student.majorId }">
+              		<option value="${major.majorId }" selected>${major.majorName }</option>
+              	</c:if>
+              	<c:if test="${major.majorId!=student.majorId }">
+              		<option value="${major.majorId }">${major.majorName }</option>
+              	</c:if>
+              </c:forEach>
+              </select>
             </div>
 
             <div class="mb-3">

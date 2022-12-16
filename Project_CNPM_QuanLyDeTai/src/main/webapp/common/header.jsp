@@ -16,6 +16,7 @@
             </div>
             <!-- ############################ Đăng nhập ############################## -->
             <div class="modal fade" id="dang_nhap">
+
                 <div class="modal-dialog ">
 		<div class="modal-content ">
 			<form method="post" action="${link }login" id="frm-login">
@@ -49,6 +50,7 @@
 		</div>
 		</div>
 		</div><!-- /.modal -->
+
             <!-- ===================================Thông tin người dùng=========================-->
             <div class="modal fade" id="thong_tin">
                 <div class="modal-dialog">

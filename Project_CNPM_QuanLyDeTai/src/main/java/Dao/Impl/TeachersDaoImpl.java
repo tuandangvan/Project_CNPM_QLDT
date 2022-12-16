@@ -11,7 +11,7 @@ import Connection.DBConnection;
 import Dao.ITeachersDao;
 import Models.TeachersModel;
 
-public class TeachersDaoImpl extends DBConnection implements ITeachersDao{
+public class TeachersDaoImpl extends DBConnection implements ITeachersDao {
 	@Override
 	public void insert(TeachersModel teacher) {
 		// TODO Auto-generated method stub
@@ -33,8 +33,7 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao{
 		}
 
 	}
-	
-	
+
 	@Override
 	public void edit(TeachersModel teachers) {
 
@@ -66,7 +65,7 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
@@ -85,7 +84,7 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao{
 //				teacherser.setBoolean(3, signup.getBoolean());
 //				teacherser.setCreatedAt(rs.getDate("createdAt"));
 //				teacherser.setPrice(rs.getBigDecimal("price"));
-		
+
 				return major;
 			}
 		} catch (Exception e) {
@@ -96,7 +95,7 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao{
 
 	@Override
 	public List<TeachersModel> getAll() {
-		List<TeachersModel> teachers= new ArrayList<TeachersModel>();
+		List<TeachersModel> teachers = new ArrayList<TeachersModel>();
 		String sql = "SELECT * FROM teachers";
 		try {
 			Connection con = super.getConnection();
@@ -104,14 +103,14 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao{
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				TeachersModel major = new TeachersModel();
-				
+
 //				teacherser.setteachersId(rs.getInt("teachersId"));
 //				teacherser.setteachersName(rs.getString(id));
 //				teacherser.setteachersId(rs.getInt("teachersId"));
 //				teacherser.setBoolean(3, signup.getBoolean());
 //				teacherser.setCreatedAt(rs.getDate("createdAt"));
 //				teacherser.setPrice(rs.getBigDecimal("price"));
-				
+
 				teachers.add(major);
 			}
 		} catch (Exception e) {
@@ -138,7 +137,7 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao{
 				teacher.setEmail(rs.getString("email"));
 				teacher.setPhone(rs.getString("phone"));
 				teacher.setMajorId(rs.getInt("majorId"));
-				
+
 				return teacher;
 			}
 		} catch (Exception e) {
@@ -146,6 +145,47 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao{
 		}
 		return null;
 	}
+
+	@Override
+	public List<TeachersModel> getListSearh(String key , int idPage) {
+		List<TeachersModel> teachers = new ArrayList<TeachersModel>();
+		String sql = "DECLARE @value nvarchar(50)\r\n" 
+				+ "set @value= N'%" + key + "%'\r\n"
+				+ "select distinct Teachers.teacherId, Teachers.teacherName, Teachers.phone, Teachers.email,\r\n"
+				+ "(select Majors.majorName from Majors where Majors.majorId = Teachers.majorId) as majorName,\r\n"
+				+ "(select Topic.topicName from Topic  where Teachers.teacherId = Topic.teacherId) as topicName\r\n"
+				+ "from Teachers\r\n" + "where Teachers.teacherName like @value \r\n"
+				+ "or Teachers.teacherId like @value \r\n" + "or Teachers.phone  like @value\r\n"
+				+ "or Teachers.email  like @value\r\n"
+				+ "ORDER BY Teachers.teacherId\r\n"
+				+ "OFFSET (?-1)*10 ROWS\r\n"
+				+ "FETCH FIRST 10 ROWS ONLY";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, idPage);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				TeachersModel teacher = new TeachersModel();
+
+				teacher.setTeacherId(rs.getInt("teacherId"));
+				teacher.setTeacherName(rs.getString("teacherName"));
+				teacher.setPhone(rs.getString("phone"));
+				teacher.setEmail(rs.getString("email"));
+
+				teacher.setTopicName(rs.getString("topicName"));
+				teacher.setMajorName(rs.getString("majorName"));
+
+			
+				teachers.add(teacher);
+				}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return teachers;
+	}
+
 	@Override
 	public TeachersModel getByUser(String user) {
 		String sql = "SELECT * FROM teachers WHERE email = ? ";
@@ -154,23 +194,25 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, user);
 			ResultSet rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				int teacherId = rs.getInt("teacherId");
-			    String teacherName = rs.getString("teacherName");
-			    Boolean gender = rs.getBoolean("gender");
-			    Date birth  = rs.getDate("birth");;
-			    String email = rs.getString("email");
-			    String phone = rs.getString("phone");
+				String teacherName = rs.getString("teacherName");
+				Boolean gender = rs.getBoolean("gender");
+				Date birth = rs.getDate("birth");
+				;
+				String email = rs.getString("email");
+				String phone = rs.getString("phone");
 				int majorId = rs.getInt("majorId");
-				
-				return new TeachersModel(teacherId,teacherName,gender,birth,email,phone,majorId);
+
+				return new TeachersModel(teacherId, teacherName, gender, birth, email, phone, majorId);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
+
 	@Override
 	public List<TeachersModel> getAllTeacherCouncil(int teacherId) {
 		List<TeachersModel> teachers= new ArrayList<TeachersModel>();
@@ -199,6 +241,7 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao{
 		}
 		return teachers;
 	}
+
 	
 	@Override
 	public List<TeachersModel> getAllTeacherByTopicId(int topicId) {
@@ -278,5 +321,5 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao{
 		}
 		return teachers;
 	}
-	
+
 }

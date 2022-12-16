@@ -38,12 +38,11 @@
 			</div>
 			<div class="mb-3">
               <label for="email">Chuyên ngành</label>
-              <c:if test="${student.majorId==1 }">
-              	<input type="text" class="form-control" disabled="disabled" id="major" placeholder="Chuyên ngành" value="Kĩ thuật dữ liệu">
-              </c:if>
-              <c:if test="${student.majorId==2 }">
-              	<input type="text" class="form-control" disabled="disabled" id="major" placeholder="Chuyên ngành" value="Công nghệ thông tin">
-              </c:if>
+              <c:forEach items="${lstMajor }" var="list">
+              	<c:if test="${list.majorId==student.majorId }">
+              		<input type="text" class="form-control" disabled="disabled" id="major" placeholder="Chuyên ngành" value="${list.majorName}">
+              	</c:if>
+              	</c:forEach>
             </div>
 
             <div class="mb-3">

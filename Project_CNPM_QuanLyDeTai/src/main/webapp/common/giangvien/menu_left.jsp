@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url value="/teacher" var="link"></c:url>
+
 
                     <div id="left-content">
                         <div class="col-md-3">
@@ -31,87 +32,114 @@
                    	 					<div class="modal-dialog">
                         					<div class="modal-content">
 
-                        					</div><!-- /.modal-content -->
-                    					</div><!-- /.modal-dialog -->
-			                		</div><!-- /.modal -->
-			            		</div>
+			</div>
+			<!-- /panel-default -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 id="mobile_sinhvien">Giảng Viên</h4>
+				</div>
+				<div class="modal fade" id="change_info">
+					<div class="modal-dialog">
+						<div class="modal-content"></div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+			</div>
 
-                                
+</div>
+</div>
+</div>
 
 
 
-                                <!--============================Bench==================-->
-                                
-                            <!-- Modal Who online -->
-                            <div class="modal fade" id="who_online" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title" id="myModalLabel">Online Users</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <td>STT</td>
-                                                        <td>Tên SV</td>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ########################### Form ###########################-->
-                            <!-- =========================Tìm kiếm box================================ -->
-                            <div class="modal fade" id="seach_box">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title">Tìm kiếm</h4>
-                                        </div>
-                                        <form action="/Home/TimKiem" method="get" id="cpa-form">
-                                            <div class="modal-body">
-                                                <div id="err_tk"></div>
-                                                <select class="form-control text-center" name="param_option" id="tim_kiem_tong_hop">
-                                                    <option value="timkiemgiangvien">Tìm kiếm giảng viên</option>
-                                                    <option value="timkiemsinhvien">Tìm kiếm sinh viên</option>
-                                                    <option value="timkiemdetai">Tìm kiếm đề tài</option>
-                                                </select>
-                                                <br />
-                                                <label>Nhập từ khoá :</label>
-                                                <input type="text" class="form-control" id="parameter1" name="param_textbox" value="" placeholder="Mọi thứ..." />
-                                                <div class="clear"></div>
-                                                <div id="search_advance">
-                                                    <br />
-                                                    <div id="type_detai" style="display: none;">
-                                                        
-                                                        <fieldset>
-    <legend>Chọn loại đề tài</legend>
-        <input type="radio" name="group_loaidt" value="1" /> <span>Tiểu luận chuy&#234;n ng&#224;nh | K 14 <br /></span>
-        <input type="radio" name="group_loaidt" value="3" /> <span>Đề t&#224;i tốt nghiệp | K 14 <br /></span>
-        <input type="radio" name="group_loaidt" value="4" /> <span>Tiểu luận chuy&#234;n ng&#224;nh | K 17 <br /></span>
-        <input type="radio" name="group_loaidt" value="8" /> <span>Tiểu luận chuy&#234;n ng&#224;nh | K 19 <br /></span>
-    
-</fieldset>;
-                                                    </div><!-- End #search_advance -->
-                                                </div><!--End body -->
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary" id="timkiem_btn">Tìm kiếm</button>
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                </div>
-                                            </div><!-- /.modal-content -->
-                                        </form>
-                                    
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
-                        </div><!-- ===================================Ajax========================= -->
-                        <script>
+			<!--============================Bench==================-->
+
+			<!-- Modal Who online -->
+			<div class="modal fade" id="who_online" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">Online Users</h4>
+						</div>
+						<div class="modal-body">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<td>STT</td>
+										<td>Tên SV</td>
+									</tr>
+								</thead>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- ########################### Form ###########################-->
+			<!-- =========================Tìm kiếm box================================ -->
+			<div class="modal fade" id="seach_box">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Tìm kiếm</h4>
+						</div>
+						<form action="./search" method="get" id="cpa-form">
+							<div class="modal-body">
+								<div id="err_tk"></div>
+								<select class="form-control text-center" name="param_option"
+									id="tim_kiem_tong_hop">
+									<option value="timkiemgiangvien">Tìm kiếm giảng viên</option>
+									<option value="timkiemsinhvien">Tìm kiếm sinh viên</option>
+									<option value="timkiemdetai">Tìm kiếm đề tài</option>
+								</select> <br /> <label>Nhập từ khoá :</label> <input type="text"
+									class="form-control" id="parameter1" name="param_textbox"
+									value="" placeholder="Mọi thứ..." />
+								<div class="clear"></div>
+								<div id="search_advance">
+									<br />
+									<div id="type_detai" style="display: none;">
+
+										<fieldset>
+											<legend>Chọn loại đề tài</legend>
+											<c:forEach items="${signs}" var="signs">
+												<input type="radio" name="group_loaidt"
+													value="${signs.yEnd }" />
+												<span>Tiểu luận chuyên ngành | Khóa ${signs.yEnd }<br />
+												</span>
+											</c:forEach>
+
+										</fieldset>
+									</div>
+									<!-- End #search_advance -->
+								</div>
+								<!--End body -->
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-primary" id="timkiem_btn">Tìm
+										kiếm</button>
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</form>
+
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+			</div>
+			<!-- ===================================Ajax========================= -->
+			<script>
                             $(document).ready(function () {
                                 $("#cpa-form").submit(function (e) {
                                     if ($("#parameter1").val() == '') {
@@ -135,9 +163,7 @@
                                 });
                             })
                         </script>
-                        
-                    </div>
-                </div>  
 
-                                    
-                </div>
+		</div>
+	</div>
+</div>

@@ -10,11 +10,16 @@ public class TopicModel {
 	private int teacherId;
 	
 	private String detail;
+	
+	//HuydzPRo
+	private String teacherName;
+	private int count;
+	private String majorName;
+
 	private Date createAt;
 	private String link;
 	
 	
-	//
 	private int quantityRegister;
 
 	public TopicModel(int topicId, String topicName, int teacherId, String detail, Date createAt) {
@@ -71,6 +76,22 @@ public class TopicModel {
 		this.detail = detail;
 	}
 
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public Date getCreateAt() {
 		return createAt;
 	}
@@ -94,7 +115,12 @@ public class TopicModel {
 	public void setQuantityRegister(int quantityRegister) {
 		this.quantityRegister = quantityRegister;
 	}
-	
+	public String getMajorName() {
+		return majorName;
+	}
+	public void setMajorName(String majorName) {
+		this.majorName = majorName;
+	}
 	
 }
 

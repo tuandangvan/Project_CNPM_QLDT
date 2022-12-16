@@ -139,6 +139,43 @@ public class TopicDaoImpl extends DBConnection implements ITopicDao{
 		return null;
 	}
 	
+	public List<TopicModel> getListSearh(String key, int idPage) {
+		List<TopicModel> topics = new ArrayList<TopicModel>();
+		String sql = "DECLARE @value nvarchar(50)\r\n"
+				+ "set @value= N'%"+key+"%'\r\n"
+				+ "Select distinct Topic.topicId, Topic.topicName, Majors.majorName,\r\n"
+				+ "(select Teachers.teacherName From Teachers WHERE Teachers.teacherId = Topic.teacherId) as teacherName,\r\n"
+				+ "(select count(topicId) from TopicDetails Where Topic.topicId = TopicDetails.topicId) as count\r\n"
+				+ "from Topic, Teachers, Majors\r\n"
+				+ "where (Topic.topicName like @value or teacherName like @value)\r\n"
+				+ "and Teachers.teacherId =Topic.teacherId and Teachers.majorId =Majors.majorId\r\n"
+				+ "ORDER BY Topic.topicId\r\n"
+				+ "OFFSET (?-1)*10 ROWS\r\n"
+				+ "FETCH FIRST 10 ROWS ONLY";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, idPage);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				TopicModel topic = new TopicModel();
+				
+				topic.setTopicId(rs.getInt("topicId"));
+				topic.setTopicName(rs.getString("topicName"));
+				topic.setTeacherName(rs.getString("teacherName"));
+				topic.setCount(rs.getInt("count"));
+				topic.setMajorName(rs.getString("majorName"));
+
+				topics.add(topic);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return topics;
+	}
+				
+
+	
 	@Override
 	public List<TopicModel> findTopicByEmail(String email) {
 		String sql = "select Topic.topicId, Topic.topicName, Topic.teacherId, Topic.detail, Topic.createAt, Topic.link \r\n"
@@ -167,6 +204,8 @@ public class TopicDaoImpl extends DBConnection implements ITopicDao{
 		}
 		return topics;
 	}
+
+
 	
 	@Override
 	public List<TopicModel> getAllByTeacher(int teacherId)

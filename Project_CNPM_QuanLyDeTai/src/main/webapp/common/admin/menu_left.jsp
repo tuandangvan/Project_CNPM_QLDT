@@ -18,11 +18,16 @@
                                     <a href="${link}/singUp/add" class="list-group-item "><img src="<c:url value="/assets/public/images/Actions-document-edit-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Tạo đợt đăng ký</a>
                                     <a href="${link}/Council" class="list-group-item "><img src="<c:url value="/assets/public/images/Actions-document-edit-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Tạo hội đồng chấm thi</a>
                                     <a href="${link}/manage-account" class="list-group-item  "><img src="<c:url value="/assets/public/images/user-group-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Quản lý tài khoản</a>
-                            		<a href="${link}/manage-teacher" class="list-group-item"><img src="<c:url value="/assets/public/images/Teacher-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Quản lý giảng viên</a>
-					                <a href="${link}/manage-student" class="list-group-item "><img src="<c:url value="/assets/public/images/Student-3-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Quản lý sinh viên</a>
-					                <a href="${link1}logout" class="list-group-item"><img src="<c:url value="/assets/public/images/Apps-session-logout-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Đăng xuất</a>
+                            		<a href="${link}/manage-teacher" class="list-group-item"><img src="<c:url value="/assets/public/images/Student-3-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Quản lý giảng viên</a>
+					                <a href="${link}/manage-student" class="list-group-item "><img src="<c:url value="/assets/public/images/Teacher-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Quản lý sinh viên</a>
+					                <a href="${link1 }logout" class="list-group-item"><img src="<c:url value="/assets/public/images/Apps-session-logout-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Đăng xuất</a>
 					                
                                 </div><!-- /panel-default -->
+                
+
+                                
+
+
 
                                 <!--============================Bench==================-->
                                 
