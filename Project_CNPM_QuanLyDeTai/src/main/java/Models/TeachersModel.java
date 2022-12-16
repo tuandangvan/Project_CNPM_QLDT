@@ -10,6 +10,11 @@ public class TeachersModel {
 	private String email;
 	private String phone;
 	private int majorId;
+	
+	//Của Huy
+	private String majorName;
+	private String topicName;
+	
 	public TeachersModel() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -66,6 +71,18 @@ public class TeachersModel {
 	}
 	public void setMajorId(int majorId) {
 		this.majorId = majorId;
+	}
+	public String getMajorName() {
+		return majorName;
+	}
+	public void setMajorName(String majorName) {
+		this.majorName = majorName;
+	}
+	public String getTopicName() {
+		return topicName;
+	}
+	public void setTopicName(String topicName) {
+		this.topicName = topicName;
 	}
 	
 	

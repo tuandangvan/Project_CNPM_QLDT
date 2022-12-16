@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,6 +21,8 @@ public class RegistrationInstructionsController extends HttpServlet{
 	ISignUpDao signUp = new SignUpDaoImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		List<SignUpModel> signs = signUp.getAll();
+		req.setAttribute("signs",signs);
 		
 		SignUpModel sign = signUp.getTop();
 		req.setAttribute("sign",sign);

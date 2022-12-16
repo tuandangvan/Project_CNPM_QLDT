@@ -18,6 +18,7 @@ import Models.SignUpModel;
 @WebServlet(urlPatterns = {"/home/TinTuGiaoVu"})
 public class TinTuGiaoVuController extends HttpServlet{
 
+	
 	ISignUpDao signUp = new SignUpDaoImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

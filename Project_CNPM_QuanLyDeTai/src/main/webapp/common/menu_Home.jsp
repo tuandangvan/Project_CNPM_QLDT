@@ -13,15 +13,7 @@
 					<h4 id="mobile_home">Danh Mục</h4>
 				</div>
 
-				<a href="/Home/Index" class="list-group-item"><img
-					src="<c:url value="/assets/public/images/house-icon.png"/>"
-					width="24" height="24" /><span class="pull-right"><i
-						class="icon-chevron-right"></i></span> Trang Chủ</a> <a
-					href="/Home/LoaiDeTai" class="list-group-item "><img
-					src="<c:url value="/assets/public/images/Actions-view-calendar-list-icon.png"/>"
-					width="24" height="24" /><span class="pull-right"><i
-						class="icon-chevron-right"></i></span> Danh sách đề tài</a> <a
-					href="${link }" class="list-group-item"><img
+				<a href="${link }" class="list-group-item"><img
 					src="<c:url value="/assets/public/images/house-icon.png"/>"
 					width="24" height="24" /><span class="pull-right"><i
 						class="icon-chevron-right"></i></span> Trang Chủ</a> <a
@@ -95,7 +87,7 @@
 								aria-hidden="true">&times;</button>
 							<h4 class="modal-title">Tìm kiếm</h4>
 						</div>
-						<form action="/Home/TimKiem" method="get" id="cpa-form">
+						<form action="${link }/TimKiem" method="get" id="cpa-form">
 							<div class="modal-body">
 								<div id="err_tk"></div>
 								<select class="form-control text-center" name="param_option"
@@ -114,9 +106,10 @@
 										<fieldset>
 											<legend>Chọn loại đề tài</legend>
 											<c:forEach items="${signs}" var="signs">
-											<input type="radio" name="group_loaidt" value="${signs.yEnd }" /> <span>Tiểu
-												luận chuyên ngành | Khóa ${signs.yEnd }<br />
-											</span> 
+												<input type="radio" name="group_loaidt"
+													value="${signs.yEnd }" />
+												<span>Tiểu luận chuyên ngành | Khóa ${signs.yEnd }<br />
+												</span>
 											</c:forEach>
 
 										</fieldset>
@@ -142,29 +135,42 @@
 
 			<!-- ===================================Ajax========================= -->
 			<script>
-                            $(document).ready(function () {
-                                $("#cpa-form").submit(function (e) {
-                                    if ($("#parameter1").val() == '') {
-                                        $('#err_tk').html('<div class="alert alert-danger">Vui lòng nhập từ khoá tìm kiếm</div>');
-                                        $("#parameter1").focus();
-                                        return false;
-                                    }
-                                    if ($('#tim_kiem_tong_hop').val() == "timkiemdetai")
-                                    {
-                                        //$('*[name=group_loaidt]').is(":not(:checked)") kiểm tra radio chưa check
+				$(document)
+						.ready(
+								function() {
+									$("#cpa-form")
+											.submit(
+													function(e) {
+														if ($("#parameter1")
+																.val() == '') {
+															$('#err_tk')
+																	.html(
+																			'<div class="alert alert-danger">Vui lòng nhập từ khoá tìm kiếm</div>');
+															$("#parameter1")
+																	.focus();
+															return false;
+														}
+														if ($(
+																'#tim_kiem_tong_hop')
+																.val() == "timkiemdetai") {
+															//$('*[name=group_loaidt]').is(":not(:checked)") kiểm tra radio chưa check
 
-                                        if ($("*[name=group_loaidt]").is(":checked")) {
-                                            return true;
-                                        }
-                                        else //radio chưa check
-                                        {
-                                            $('#err_tk').html('<div class="alert alert-danger">Vui lòng chọn loại đề tài</div>');
-                                            return false;
-                                        }
-                                    }
-                                });
-                            })
-                        </script>
+															if ($(
+																	"*[name=group_loaidt]")
+																	.is(
+																			":checked")) {
+																return true;
+															} else //radio chưa check
+															{
+																$('#err_tk')
+																		.html(
+																				'<div class="alert alert-danger">Vui lòng chọn loại đề tài</div>');
+																return false;
+															}
+														}
+													});
+								})
+			</script>
 
 		</div>
 	</div>

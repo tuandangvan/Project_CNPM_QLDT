@@ -147,4 +147,38 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 		return null;
 	}
 	
+	
+	public List<StudentsModel> getListSearh(String key) {
+		List<StudentsModel> students= new ArrayList<StudentsModel>();
+		String sql = "DECLARE @value nvarchar(50)\r\n"
+				+ "set @value= N'%" + key +"%'\r\n"
+				+ "select Students.studentId, Students.studentName, Students.phone, Students.email,\r\n"
+				+ "(select Majors.majorName from Majors where Majors.majorId = Students.majorId) as majorName,\r\n"
+				+ "(select Topic.topicName from Topic, TopicDetails \r\n"
+				+ "where TopicDetails.studentId = Students.studentId and TopicDetails.topicId=Topic.topicId) as topicName\r\n"
+				+ "from Students\r\n"
+				+ "where Students.studentName like @value or Students.studentId  like @value or Students.phone  like @value";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				StudentsModel student = new StudentsModel();
+				
+				student.setStudentId(rs.getInt("studentId"));
+				student.setStudentName(rs.getString("studentName"));
+				student.setPhone(rs.getString("phone"));
+				student.setEmail(rs.getString("email"));
+				
+				student.setTopicName(rs.getString("topicName"));
+				student.setMajorName(rs.getString("majorName"));
+
+				
+				students.add(student);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return students;
+	}
 }

@@ -17,7 +17,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Đăng nhập</h4>
+                            <h4 class="modal-title">Đăng nhập</h4>	
                         </div>
                         <form method="post" action="/Home/DangNhap" id="frm-login">
                             <div class="modal-body">

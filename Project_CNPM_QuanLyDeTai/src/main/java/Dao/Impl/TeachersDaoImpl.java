@@ -142,5 +142,42 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao{
 		}
 		return null;
 	}
+
+
+	@Override
+	public List<TeachersModel> getListSearh(String key) {
+		List<TeachersModel> teachers= new ArrayList<TeachersModel>();
+		String sql = "DECLARE @value nvarchar(50)\r\n"
+				+ "set @value= N'%" + key +"%'\r\n"
+				+ "select Teachers.teacherId, Teachers.teacherName, Teachers.phone, Teachers.email,\r\n"
+				+ "(select Majors.majorName from Majors where Majors.majorId = Teachers.majorId) as majorName,\r\n"
+				+ "(select Topic.topicName from Topic  where Teachers.teacherId = Topic.teacherId) as topicName\r\n"
+				+ "from Teachers\r\n"
+				+ "where Teachers.teacherName like @value \r\n"
+				+ "or Teachers.teacherId like @value \r\n"
+				+ "or Teachers.phone  like @value\r\n"
+				+ "or Teachers.email  like @value";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				TeachersModel teacher = new TeachersModel();
+				
+				teacher.setTeacherId(rs.getInt("teacherId"));
+				teacher.setTeacherName(rs.getString("teacherName"));
+				teacher.setPhone(rs.getString("phone"));
+				teacher.setEmail(rs.getString("email"));
+				
+				teacher.setTopicName(rs.getString("topicName"));
+				teacher.setMajorName(rs.getString("majorName"));
+				
+				teachers.add(teacher);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return teachers;
+	}
 	
 }

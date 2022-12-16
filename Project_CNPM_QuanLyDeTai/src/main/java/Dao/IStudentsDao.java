@@ -17,5 +17,7 @@ public interface IStudentsDao {
 	StudentsModel get(int id);
 
 	List<StudentsModel> getAll();
+	
+	List<StudentsModel> getListSearh(String key);
 
 }

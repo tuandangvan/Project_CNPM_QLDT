@@ -18,4 +18,7 @@ public interface ITopicDao {
 
 	TopicModel findById(int id);
 
+	List<TopicModel> getListSearh(String key);
+	
+
 }
