@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:url value="/home" var="link"></c:url>
+	<c:url value="/home" var="link"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +13,7 @@
 		<div class="well-sm">
 			<span> 
 					<img src="<c:url value="/assets/public/images/bullet-blue-icon.png"/>" > <small>
-						<a href="/Home/TinTuGiaoVu?id=9"> Thông báo đăng ký chuyên
+						<a href="<c:url value="TinTuGiaoVu?id=${sign.signUpId}"></c:url>"> Thông báo đăng ký chuyên
 							ngành khóa ${sign.yStart } <small style="color: rgb(87, 87, 87);">(${sign.dStart}/${sign.mStart}/${sign.yStart} đến ${sign.dEnd}/${sign.mEnd}/${sign.yEnd})</small>
 					</a>
 				</small>
@@ -89,16 +89,16 @@
 				</div>
 
 
-
+thô
 				<hr>
 				<h3 class="text-danger">&nbsp;&nbsp;Tin liên quan</h3>
 				<hr>
 				<ul>
 					<c:forEach items="${signs}" var="signs">
-						<a href="${link}/TinTuGiaoVu?id=${signs.signUpId}">
+						<a href="<c:url value="TinTuGiaoVu?id=${signs.signUpId}"></c:url>">
 							<li>
 								<p>
-									<span class="badge green"> ${sign.dStart}/${sign.mStart}/${sign.yStart} đến ${sign.dEnd}/${sign.mEnd}/${sign.yEnd}</span> Đăng ký
+									<span class="badge green"> ${signs.dStart}/${signs.mStart}/${signs.yStart} đến ${signs.dEnd}/${signs.mEnd}/${signs.yEnd}</span> Đăng ký
 									Tiểu luận chuyên ngành khoá ${signs.yStart }
 								</p>
 						</li>

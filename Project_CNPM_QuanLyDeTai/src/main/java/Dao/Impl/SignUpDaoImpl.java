@@ -74,6 +74,18 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
+				SignUpModel signup = new SignUpModel();
+				signup.setSignUpId(rs.getInt("signupId"));
+				signup.setStartTime(rs.getDate("startTime"));
+				signup.setEndTime(rs.getDate("endTime"));
+				signup.setRole(rs.getBoolean("role"));
+				signup.setdEnd(rs.getInt("dEnd"));
+				signup.setyEnd(rs.getInt("yEnd"));
+				signup.setmEnd(rs.getInt("mEnd"));
+				signup.setdStart(rs.getInt("dStart"));
+				signup.setyStart(rs.getInt("yStart"));
+				signup.setmStart(rs.getInt("mStart"));				
+				return signup;
 //				SignUpModel signup = new SignUpModel();
 //				signup.setSignUpId(rs.getInt("signupId"));
 //				signup.setStartTime(rs.getTimestamp("startTime"));
