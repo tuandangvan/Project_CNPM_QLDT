@@ -2,13 +2,11 @@ package Controller.GiangVien;
 
 import Dao.ICouncilDao;
 import Dao.ICouncilDetailsDao;
-import Dao.IMajorsDao;
 import Dao.ISignUpDao;
 import Dao.ITeachersDao;
 import Dao.ITopicDao;
 import Dao.Impl.CouncilDaoImpl;
 import Dao.Impl.CouncilDetailsDaoImpl;
-import Dao.Impl.MajorsDaoImpl;
 import Dao.Impl.SignUpDaoImpl;
 import Dao.Impl.TeachersDaoImpl;
 import Dao.Impl.TopicDaoImpl;
