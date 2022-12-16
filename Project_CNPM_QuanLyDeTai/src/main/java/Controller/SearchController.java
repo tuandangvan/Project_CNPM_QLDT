@@ -24,7 +24,6 @@ import Models.PageModel;
 import Models.SignUpModel;
 import Models.StudentsModel;
 import Models.TeachersModel;
-import Models.TopicDetailsModel;
 import Models.TopicModel;
 
 @SuppressWarnings("serial")
