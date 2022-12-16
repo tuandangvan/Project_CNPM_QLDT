@@ -6,7 +6,6 @@
     <div style="color: rgb(7, 132, 163);" class="panel-heading">
         <h4 style="font-family: verdana;color:rgb(87,87,87);">Chi tiết đề tài</h4>
     </div>
-    <c:if test="${topic.topicId!=null }">
     <div class="panel-body">
         <div id="detail">
             <table class="table table-hover footable-loaded footable">
@@ -85,6 +84,28 @@
                     <td colspan="2" style="text-align: center;"><button id="back" type="button" class="btn btn-info">Quay về</button></td>
                 </tr>
             </tbody></table>
+            <c:if test="${isleader==1}">
+	            <form class="needs-validation" novalidate action="${edit }" method="post">
+		            <div class="mb-3">
+		              <label for="email">Nộp báo cáo</label>
+		              <input type="text" class="form-control"  placeholder="Link nộp báo cáo" value="${topic.link }" name="report">
+		            </div>
+		            <hr class="mb-4">
+		            <input type="submit" class="btn btn-success btn-lg btn-block" value="Nộp báo cáo">
+	            
+	            </form>
+            </c:if>
+            <c:if test="${isleader!=1}">
+	            <form class="needs-validation" novalidate action="${edit }" method="post" >
+		            <div class="mb-3" >
+		              <label for="email">Nộp báo cáo</label>
+		              <input type="text" class="form-control"  placeholder="Link nộp báo cáo" value="${topic.link }" name="report" disabled>
+		            </div>
+		            <hr class="mb-4">
+		            <input type="submit" class="btn btn-success btn-lg btn-block" value="Nộp báo cáo" disabled>
+	            
+	            </form>
+            </c:if>
         </div>
         <!-- ========================== Info nhom truong ==========================-->
         <div class="modal fade" id="truong_nhom">
@@ -146,5 +167,4 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
     </div>
-    </c:if>
 </div>

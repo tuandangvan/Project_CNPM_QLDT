@@ -21,7 +21,7 @@
 			<c:forEach var="counCil" items="${listCouncil}">
 				<tr>
 					<td>${iTopicDao.getById(counCil.topicId).topicName}</td>
-					<td>${counCil.averageScore}</td>
+					<td>${counCil.averageScore<0 ? "Chưa chấm điểm" : counCil.averageScore}</td>
 					<td><c:forEach items="${iCouncilDetailsDao.getAllByCouncilId(counCil.id)}" var="item">
 						${iTeachersDao.findById(item.teacherId).teacherName}<br>
 					</c:forEach></td>

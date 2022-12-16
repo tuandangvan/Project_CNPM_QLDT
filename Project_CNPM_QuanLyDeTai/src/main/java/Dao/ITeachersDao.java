@@ -22,4 +22,10 @@ public interface ITeachersDao {
 
 	List<TeachersModel> getAllTeacherCouncil(int teacherId);
 
+	List<TeachersModel> getAllTeacherByTopicId(int topicId);
+
+	void editByAdmin(TeachersModel teachers);
+
+	List<TeachersModel> getAllByAdmin();
+
 }

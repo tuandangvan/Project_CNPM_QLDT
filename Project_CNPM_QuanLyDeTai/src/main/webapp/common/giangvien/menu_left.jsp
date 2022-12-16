@@ -22,6 +22,8 @@
                     					<h4 id="mobile_sinhvien">Giảng Viên</h4>
                 					</div>
 					                <a href="${link}/profile" class="list-group-item"><img src="<c:url value="/assets/public/images/Student-3-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Quản trị tài khoản</a>
+					                <a href="${link}/info-teacher" class="list-group-item "><img src="<c:url value="/assets/public/images/Teacher-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Thông tin giảng viên</a>
+					                <a href="${link}/info-student" class="list-group-item "><img src="<c:url value="/assets/public/images/Student-3-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Thông tin sinh viên</a>
 					                <a href="${link}/register" class="list-group-item  "><img src="<c:url value="/assets/public/images/Actions-document-edit-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Đăng ký đề tài</a>
 					                <a href="${link }/listCouncil" class="list-group-item  "><img src="<c:url value="/assets/public/images/user-group-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Hội đồng chấm điểm</a>				                
 					                <a href="./logout" class="list-group-item"><img src="<c:url value="/assets/public/images/Apps-session-logout-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Đăng xuất</a>

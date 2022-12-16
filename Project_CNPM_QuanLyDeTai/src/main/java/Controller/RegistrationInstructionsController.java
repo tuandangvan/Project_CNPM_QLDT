@@ -14,7 +14,7 @@ import Dao.Impl.SignUpDaoImpl;
 import Models.SignUpModel;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = {"/home/RegistrationInstructions","/admin/RegistrationInstructions","/student/RegistrationInstructions",
+@WebServlet(urlPatterns = {"/RegistrationInstructions","/admin/RegistrationInstructions","/student/RegistrationInstructions",
 		"/teacher/RegistrationInstructions"})
 public class RegistrationInstructionsController extends HttpServlet{
 

@@ -62,7 +62,7 @@
                         <td>${councilDt.teacherName }</td>
                         <td>
                         	<a class="btn btn-danger" type="button"
-								href="<c:url value='Council/create?id=${topic.teacherId }'/>">Xóa</a>
+								href="<c:url value='./delete?councilId=${councilDt.councilId}&teacherId=${councilDt.teacherId }&teachReturn=${teachReturn }&topicReturn=${topicReturn} '/>">Xóa</a>
                         </td>
                     </tr>
                 </c:forEach>

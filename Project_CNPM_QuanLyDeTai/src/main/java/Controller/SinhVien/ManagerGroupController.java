@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Dao.IMajorsDao;
 import Dao.IStudentsDao;
@@ -21,14 +22,15 @@ import Dao.Impl.StudentsDaoImpl;
 import Dao.Impl.TeachersDaoImpl;
 import Dao.Impl.TopicDaoImpl;
 import Dao.Impl.TopicDetailsDaoImpl;
+import Models.AccountModel;
 import Models.StudentsModel;
 import Models.TeachersModel;
 import Models.TopicDetailsModel;
 import Models.TopicModel;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = { "/student/topicdetail-register" })
-public class TopicDetailController extends HttpServlet {
+@WebServlet(urlPatterns = { "/student/group" })
+public class ManagerGroupController extends HttpServlet {
 
 	IMajorsDao majorsDao = new MajorsDaoImpl();
 	ITopicDao topicDao = new TopicDaoImpl();
@@ -39,9 +41,12 @@ public class TopicDetailController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		try {
-			// lấy topicId
-			String topicId = req.getParameter("id");
+		HttpSession session = req.getSession();
+		if (session != null && session.getAttribute("account") != null) {
+			AccountModel account = (AccountModel) session.getAttribute("account");
+			// lấy topicId theo email
+			String topicId = studentsDao.findTopicIdByEmail(account.getUsername());
+
 			// tìm dề tài
 			TopicModel topic = new TopicModel();
 			topic = topicDao.findById(Integer.parseInt(topicId));
@@ -72,12 +77,18 @@ public class TopicDetailController extends HttpServlet {
 			req.setAttribute("majorName", majorName);
 
 			// lấy leader thành viên
-			StudentsModel leader = new StudentsModel();
+			StudentsModel leader = null;
 			for (TopicDetailsModel tp : topicdetails) {
 				if (tp.getLeader()) {
+					leader = new StudentsModel();
 					leader = studentsDao.findById(tp.getStudentId());
 					req.setAttribute("leader", leader);
+					break;
 				}
+			}
+
+			if (leader.getEmail().equals(account.getUsername())) {
+				req.setAttribute("isleader", 1);
 			}
 
 			// lấy thành viên
@@ -87,16 +98,27 @@ public class TopicDetailController extends HttpServlet {
 			teacherIn = teachersDao.findById(topic.getTeacherId());
 			req.setAttribute("teacherIn", teacherIn);
 
+
 			// lay gv phan bien
 			List<TeachersModel> teacherPbs = new ArrayList<TeachersModel>();
 			teacherPbs = teachersDao.getAllTeacherByTopicId(Integer.parseInt(topicId));
 			req.setAttribute("teacherPbs", teacherPbs);
-		} catch (Exception e) {
-			// TODO: handle exception
 		}
 
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/sinhvien/topic-detail.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/sinhvien/group-manager.jsp");
 		dispatcher.forward(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		if (session != null && session.getAttribute("account") != null) {
+			AccountModel account = (AccountModel) session.getAttribute("account");
+			String topicId = studentsDao.findTopicIdByEmail(account.getUsername());
+			String link_report = req.getParameter("report");
+			topicDao.editReport(link_report, Integer.parseInt(topicId));
+		}
+		resp.sendRedirect(req.getContextPath() + "/student/group");
 	}
 
 }

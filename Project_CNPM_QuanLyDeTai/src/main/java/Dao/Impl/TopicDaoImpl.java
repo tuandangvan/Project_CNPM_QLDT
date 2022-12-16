@@ -128,6 +128,8 @@ public class TopicDaoImpl extends DBConnection implements ITopicDao{
 				topic.setTopicName(rs.getString("topicName"));
 				topic.setTeacherId(rs.getInt("teacherId"));
 				topic.setDetail(rs.getString("detail"));
+				topic.setCreateAt(rs.getDate("createAt"));
+				topic.setLink(rs.getString("link"));
 		
 				return topic;
 			}
@@ -213,4 +215,19 @@ public class TopicDaoImpl extends DBConnection implements ITopicDao{
 		return null;
 	}
 	
+	@Override
+	public void editReport(String linkReport, int topicId) {
+		// TODO Auto-generated method stub
+		String sql = "UPDATE Topic SET link=? WHERE TopicId=?";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, linkReport);
+			ps.setInt(2, topicId);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 }

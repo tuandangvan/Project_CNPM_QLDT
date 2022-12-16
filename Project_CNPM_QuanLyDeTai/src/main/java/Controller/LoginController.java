@@ -27,8 +27,13 @@ public class LoginController extends HttpServlet {
 		resp.setContentType("text/htm");
 		resp.setCharacterEncoding("UTF-8");
 		req.setCharacterEncoding("UTF-8");
+		
+		resp.setContentType("text/html;charset=UTF-8");
+		HttpSession session = req.getSession();
+		session.removeAttribute("account");
+		resp.sendRedirect("../home");
 
-		HttpSession session = req.getSession(false);
+		session = req.getSession(false);
 		if (session != null && session.getAttribute("account") != null) {
 			resp.sendRedirect(req.getContextPath() + "/waiting");
 		}
@@ -45,7 +50,7 @@ public class LoginController extends HttpServlet {
 			}
 		}
 
-		req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+		resp.sendRedirect(req.getContextPath() + "/home");
 	}
 
 	@Override
@@ -86,7 +91,7 @@ public class LoginController extends HttpServlet {
 		} else {
 			alertMsg = "Tài Khoản hoặc mật khẩu không đúng";
 			req.setAttribute("alerts", alertMsg);
-			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+			resp.sendRedirect(req.getContextPath() + "/home");
 		}
 
 	}

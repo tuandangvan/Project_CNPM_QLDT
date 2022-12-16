@@ -20,4 +20,8 @@ public interface IStudentsDao {
 
 	StudentsModel findStudentByEmail(String email);
 
+	String findTopicIdByEmail(String email);
+
+	List<StudentsModel> getAllByAdmin();
+
 }

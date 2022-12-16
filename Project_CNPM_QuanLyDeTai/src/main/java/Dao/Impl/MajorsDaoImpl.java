@@ -15,7 +15,7 @@ public class MajorsDaoImpl extends DBConnection implements IMajorsDao{
 	@Override
 	public void insert(MajorsModel majors) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO majors(majorsName,gender,birth,email,phone) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO majors(majorName,gender,birth,email,phone) VALUES (?,?,?,?,?)";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -36,7 +36,7 @@ public class MajorsDaoImpl extends DBConnection implements IMajorsDao{
 	
 	@Override
 	public void edit(MajorsModel majors) {
-		String sql = "UPDATE  majors SET majorsName=?, gender=?, birth=? email=?, phone=? WHERE majorsId=?";
+		String sql = "UPDATE  majors SET majorName=?, gender=?, birth=? email=?, phone=? WHERE majorsId=?";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -94,7 +94,7 @@ public class MajorsDaoImpl extends DBConnection implements IMajorsDao{
 	@Override
 	public List<MajorsModel> getAll() {
 		List<MajorsModel> majors= new ArrayList<MajorsModel>();
-		String sql = "SELECT * FROM majors";
+		String sql = "SELECT * FROM Majors";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -102,7 +102,7 @@ public class MajorsDaoImpl extends DBConnection implements IMajorsDao{
 			while (rs.next()) {
 				MajorsModel major = new MajorsModel();
 				
-				major.setMajorId(rs.getInt("majorsId"));
+				major.setMajorId(rs.getInt("majorId"));
 				major.setMajorName(rs.getString("majorName"));
 				majors.add(major);
 			}

@@ -18,7 +18,7 @@ public class LogoutController extends HttpServlet {
 		resp.setContentType("text/html;charset=UTF-8");
 		HttpSession session = req.getSession();
 		session.removeAttribute("account");
-		resp.sendRedirect("../home");
+		resp.sendRedirect(req.getContextPath() + "/home");
 	}
 
 	@Override

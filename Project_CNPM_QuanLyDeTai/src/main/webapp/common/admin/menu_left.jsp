@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url value="/admin" var="link"></c:url>
+<c:url value="/" var="link1"></c:url>
 
                     <div id="left-content">
                         <div class="col-md-3">
@@ -9,15 +10,20 @@
                             <div id="desktop-menu">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h4 id="mobile_home">Danh Mục</h4>
+                                        <h4 id="mobile_home">Admin</h4>
                                     </div>
                                     
                                     <a href="${link}/home" class="list-group-item"><img src="<c:url value="/assets/public/images/house-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Trang Chủ</a>
                                     <a href="${link}/list-topic" class="list-group-item "><img src="<c:url value="/assets/public/images/Actions-view-calendar-list-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Danh sách đề tài</a>
                                     <a href="${link}/singUp/add" class="list-group-item "><img src="<c:url value="/assets/public/images/Actions-document-edit-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Tạo đợt đăng ký</a>
                                     <a href="${link}/Council" class="list-group-item "><img src="<c:url value="/assets/public/images/Actions-document-edit-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Tạo hội đồng chấm thi</a>
-                                    <a href="./logout" class="list-group-item"><img src="<c:url value="/assets/public/images/Apps-session-logout-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Đăng xuất</a>
+                                    <a href="${link}/manage-account" class="list-group-item  "><img src="<c:url value="/assets/public/images/user-group-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Quản lý tài khoản</a>
+                            		<a href="${link}/manage-teacher" class="list-group-item"><img src="<c:url value="/assets/public/images/Teacher-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Quản lý giảng viên</a>
+					                <a href="${link}/manage-student" class="list-group-item "><img src="<c:url value="/assets/public/images/Student-3-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Quản lý sinh viên</a>
+					                <a href="${link1}logout" class="list-group-item"><img src="<c:url value="/assets/public/images/Apps-session-logout-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Đăng xuất</a>
+					                
                                 </div><!-- /panel-default -->
+
                                 <!--============================Bench==================-->
                                 
                             <!-- Modal Who online -->

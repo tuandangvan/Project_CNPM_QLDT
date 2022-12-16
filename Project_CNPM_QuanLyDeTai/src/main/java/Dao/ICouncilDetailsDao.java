@@ -10,7 +10,7 @@ public interface ICouncilDetailsDao {
 
 	void edit(CouncilDetailsModel councildetail);
 
-	void delete(int id);
+	void delete(int councilId, int teacherId);
 
 	CouncilDetailsModel get(int id);
 

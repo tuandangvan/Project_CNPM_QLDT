@@ -90,17 +90,9 @@ public class TopicDetailController extends HttpServlet {
 		req.setAttribute("teacherIn", teacherIn);
 
 		// lay gv phan bien
-//		TeachersModel teacherPb = new TeachersModel();
-//		teacherIn = teachersDao.findById(topic.getTeacherId());
-//		req.setAttribute("teacherIn", teacherIn);
-
-//		List<TopicModel> topics = new ArrayList<TopicModel>();
-//		topics = topicDao.getAll();
-//		req.setAttribute("topics", topics);
-
-//		List<MajorsModel> majors = new ArrayList<MajorsModel>();
-//		majors = majorsDao.getAll();
-//		req.setAttribute("majors", majors);
+		List<TeachersModel> teacherPbs = new ArrayList<TeachersModel>();
+		teacherPbs = teachersDao.getAllTeacherByTopicId(Integer.parseInt(topicId));
+		req.setAttribute("teacherPbs", teacherPbs);
 
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/topic-detail.jsp");
 		dispatcher.forward(req, resp);

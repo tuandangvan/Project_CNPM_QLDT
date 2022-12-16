@@ -18,4 +18,8 @@ public interface IAccountDao {
 
 	List<AccountModel> getAll();
 
+	void changePassByAdmin(AccountModel account);
+
+	void editPassword(AccountModel account, String nwpassword);
+
 }
