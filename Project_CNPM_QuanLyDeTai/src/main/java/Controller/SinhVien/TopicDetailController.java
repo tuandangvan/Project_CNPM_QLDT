@@ -30,91 +30,105 @@ import Models.TopicDetailsModel;
 import Models.TopicModel;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = {"/student/topicdetail-register"})
-public class TopicDetailController extends HttpServlet{
+@WebServlet(urlPatterns = { "/student/topicdetail-register" })
+public class TopicDetailController extends HttpServlet {
 
 	IMajorsDao majorsDao = new MajorsDaoImpl();
 	ITopicDao topicDao = new TopicDaoImpl();
 	ITopicDetailsDao topicDetailsDao = new TopicDetailsDaoImpl();
 	IStudentsDao studentsDao = new StudentsDaoImpl();
 	ITeachersDao teachersDao = new TeachersDaoImpl();
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ISignUpDao signUp = new SignUpDaoImpl();
-		List<SignUpModel> signs = signUp.getAll();
-		req.setAttribute("signs",signs);
-		
-		//lấy topicId
-		String topicId = req.getParameter("id");
-		//tìm dề tài
-		TopicModel topic = new TopicModel();
-		topic = topicDao.findById(Integer.parseInt(topicId));
-		req.setAttribute("topic", topic);
-		
-		
-		//tìm topicdetail theo topicId và leader
-		List<TopicDetailsModel> topicdetails = new ArrayList<TopicDetailsModel>();
-		topicdetails = topicDetailsDao.findTopicDetailByTopicId(Integer.parseInt(topicId));
-		if(!topicdetails.isEmpty())
-		{
-			if(topicdetails.get(0).getScores()<0)
-				req.setAttribute("topicdetail", topicdetails.get(0));
-		}
-		List<StudentsModel> students = new ArrayList<StudentsModel>();
-		
-		
-		for (TopicDetailsModel topicDetail : topicdetails) {
-			//lấy leader thành viên
-			StudentsModel sd = new StudentsModel();
-			sd = studentsDao.findById(topicDetail.getStudentId());
-			students.add(sd);
-		}
-		
-		int sl = students.size();
-		req.setAttribute("sl", sl);
-		
-		req.setAttribute("students", students);
-		
-		String majorName = topicDetailsDao.findMajorNameByTopicDetail(Integer.parseInt(topicId));
-		req.setAttribute("majorName", majorName);
-		
-		
-		//lấy leader thành viên
-		StudentsModel leader = new StudentsModel();
-		for (TopicDetailsModel tp : topicdetails) {
-			if(tp.getLeader())
-			{
-				leader = studentsDao.findById(tp.getStudentId());
-				req.setAttribute("leader", leader);
+
+		try {
+			ISignUpDao signUp = new SignUpDaoImpl();
+			List<SignUpModel> signs = signUp.getAll();
+			req.setAttribute("signs", signs);
+
+			// lấy topicId
+			String topicId = req.getParameter("id");
+			// tìm dề tài
+			TopicModel topic = new TopicModel();
+			topic = topicDao.findById(Integer.parseInt(topicId));
+			req.setAttribute("topic", topic);
+
+			// tìm topicdetail theo topicId và leader
+			List<TopicDetailsModel> topicdetails = new ArrayList<TopicDetailsModel>();
+			topicdetails = topicDetailsDao.findTopicDetailByTopicId(Integer.parseInt(topicId));
+			if (!topicdetails.isEmpty()) {
+				if (topicdetails.get(0).getScores() < 0)
+					req.setAttribute("topicdetail", topicdetails.get(0));
 			}
+			List<StudentsModel> students = new ArrayList<StudentsModel>();
+
+			for (TopicDetailsModel topicDetail : topicdetails) {
+				// lấy leader thành viên
+				StudentsModel sd = new StudentsModel();
+				sd = studentsDao.findById(topicDetail.getStudentId());
+				students.add(sd);
+			}
+
+			int sl = students.size();
+			req.setAttribute("sl", sl);
+
+			req.setAttribute("students", students);
+
+			String majorName = topicDetailsDao.findMajorNameByTopicDetail(Integer.parseInt(topicId));
+			req.setAttribute("majorName", majorName);
+
+			// lấy leader thành viên
+			StudentsModel leader = new StudentsModel();
+			for (TopicDetailsModel tp : topicdetails) {
+				if (tp.getLeader()) {
+					leader = studentsDao.findById(tp.getStudentId());
+					req.setAttribute("leader", leader);
+
+				}
+//			List<StudentsModel> students = new ArrayList<StudentsModel>();
+//
+//			for (TopicDetailsModel topicDetail : topicdetails) {
+//				// lấy leader thành viên
+//				StudentsModel sd = new StudentsModel();
+//				sd = studentsDao.findById(topicDetail.getStudentId());
+//				students.add(sd);
+//			}
+//
+//			int sl = students.size();
+//			req.setAttribute("sl", sl);
+//
+//			req.setAttribute("students", students);
+//
+//			String majorName = topicDetailsDao.findMajorNameByTopicDetail(Integer.parseInt(topicId));
+//			req.setAttribute("majorName", majorName);
+//
+//			// lấy leader thành viên
+//			StudentsModel leader = new StudentsModel();
+//			for (TopicDetailsModel tp : topicdetails) {
+//				if (tp.getLeader()) {
+//					leader = studentsDao.findById(tp.getStudentId());
+//					req.setAttribute("leader", leader);
+//				}
+//			}
+
+				// lấy thành viên
+
+				// lấy giảng viên hd
+				TeachersModel teacherIn = new TeachersModel();
+				teacherIn = teachersDao.findById(topic.getTeacherId());
+				req.setAttribute("teacherIn", teacherIn);
+
+				// lay gv phan bien
+				List<TeachersModel> teacherPbs = new ArrayList<TeachersModel>();
+				teacherPbs = teachersDao.getAllTeacherByTopicId(Integer.parseInt(topicId));
+				req.setAttribute("teacherPbs", teacherPbs);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		
-		
-		//lấy thành viên
-;
-		
-		//lấy giảng viên hd
-		TeachersModel teacherIn = new TeachersModel();
-		teacherIn = teachersDao.findById(topic.getTeacherId());
-		req.setAttribute("teacherIn", teacherIn);
-		
-		//lay gv phan bien
-//		TeachersModel teacherPb = new TeachersModel();
-//		teacherIn = teachersDao.findById(topic.getTeacherId());
-//		req.setAttribute("teacherIn", teacherIn);
-		
-//		List<TopicModel> topics = new ArrayList<TopicModel>();
-//		topics = topicDao.getAll();
-//		req.setAttribute("topics", topics);
-		
-//		List<MajorsModel> majors = new ArrayList<MajorsModel>();
-//		majors = majorsDao.getAll();
-//		req.setAttribute("majors", majors);
-		
+
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/sinhvien/topic-detail.jsp");
 		dispatcher.forward(req, resp);
 	}
-	
-	
 }

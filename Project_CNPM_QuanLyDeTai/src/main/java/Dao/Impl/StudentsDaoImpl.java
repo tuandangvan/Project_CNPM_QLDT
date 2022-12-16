@@ -12,18 +12,20 @@ import Models.StudentsModel;
 
 public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 	@Override
-	public void insert(StudentsModel students) {
+	public void insert(StudentsModel student) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO students(studentsName,gender,birth,email,phone) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO students(studentName,gender,birth,email,phone, address, majorId) VALUES (?,?,?,?,?,?,?)";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			
-//			ps.setString(1, students.getstudentsName());
-//			ps.setBoolean(2, students.getGender());
-//			ps.setDate(3, students.getBirth());
-//			ps.setInt(6, students.getstudentsId());
-			
+			ps.setString(1, student.getStudentName());
+			ps.setBoolean(2, student.getGender());
+			ps.setDate(3, student.getBirth());
+			ps.setString(4, student.getEmail());
+			ps.setString(5, student.getPhone());
+			ps.setString(6, student.getAddress());
+			ps.setInt(7, student.getMajorId());
 			
 			ps.executeUpdate();
 		} catch (Exception e) {
@@ -36,7 +38,7 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 	@Override
 	public void edit(StudentsModel students) {
 		String sql = "UPDATE Students SET studentName = ?, gender = ?, birth = ?, \r\n"
-				+ "phone = ?, address = ?\r\n"
+				+ "phone = ?, address = ?, majorId = ?\r\n"
 				+ "WHERE studentId = ?";
 		try {
 			Connection con = super.getConnection();
@@ -46,8 +48,8 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 			ps.setDate(3, students.getBirth());
 			ps.setString(4, students.getPhone());
 			ps.setString(5, students.getAddress());
-			
-			ps.setInt(6, students.getStudentId());
+			ps.setInt(6, students.getMajorId());
+			ps.setInt(7, students.getStudentId());
 			
 			ps.executeUpdate();
 		} catch (Exception e) {
@@ -192,6 +194,7 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 		try {
 			Connection conn = super.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				StudentsModel student = new StudentsModel(
@@ -210,5 +213,57 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 		}
 		return null;
 	}
+	
+	@Override
+	public String findTopicIdByEmail(String email) {
+		String sql = "select TopicDetails.topicId from TopicDetails, Students, Account\r\n"
+				+ "WHERE TopicDetails.studentId=Students.studentId and Students.email=Account.username\r\n"
+				+ "and Account.username=?";
+		try {
+			Connection conn = super.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				return rs.getString("topicId");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public List<StudentsModel> getAllByAdmin(){
+		List<StudentsModel> students = new ArrayList<StudentsModel>();
+		String sql = "SELECT studentId, studentName, gender, birth, email, phone, address, Majors.majorName\r\n"
+				+ "FROM Students, Majors \r\n"
+				+ "where Students.majorId = Majors.majorId";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				StudentsModel student = new StudentsModel();
+				
+				student.setStudentId(rs.getInt(1));
+				student.setStudentName(rs.getString(2));
+				student.setGender(rs.getBoolean(3));
+				student.setBirth(rs.getDate(4));
+				student.setEmail(rs.getString(5));
+				student.setPhone(rs.getString(6));
+				student.setAddress(rs.getString(7));
+				student.setMajorName(rs.getString(8));;
+				
+				students.add(student);
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return students;
+	}
+	
 }
 	

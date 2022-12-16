@@ -122,5 +122,35 @@ public class AccountDaoImpl extends DBConnection implements IAccountDao{
 		}
 		return null;
 	}
+	@Override
+	public void changePassByAdmin(AccountModel account) {
+		String sql = "UPDATE  Account SET password=? WHERE username=?";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, account.getPassword());
+			ps.setString(2, account.getUsername());
+			
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
+	@Override
+	public void editPassword(AccountModel account, String nwpassword) {
+		String sql = "UPDATE  Account SET username=?, password=? WHERE username=? and password=?";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, account.getUsername());
+			ps.setString(2, nwpassword);
+			ps.setString(3, account.getUsername());
+			ps.setString(4, account.getPassword());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

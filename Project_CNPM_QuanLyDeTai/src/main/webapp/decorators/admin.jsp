@@ -17,7 +17,7 @@
 	<div id="wrapper">
 		<div class="container">
 			<div class="row">
-				<%@include file="/common/admin/menu_left.jsp"%>
+				<%@include file="/common/admin/menu_left.jsp"%> 
 				<div class="col-md-9">
 					<ol class="breadcrumb">
 						<li><a href="/Home/Index">Home</a></li>

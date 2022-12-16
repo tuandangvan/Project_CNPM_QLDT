@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:url value="/" var="link"></c:url>
 <div id="navigation">
+
             <div id="banner-desktop">
                 <div class="container">
                     <div id="banner">
                         <div id="login-area">
-                                   <a data-toggle="modal" href="#dang_nhap"><img src="<c:url value="/assets/public/images/Login-icon.png"/>" width="24" height="24" /> Đăng nhập</a>
+                                   <a data-toggle="modal" href="#dang_nhap">
+                                   <img src="<c:url value="/assets/public/images/Login-icon.png"/>" width="24" height="24" /> Đăng nhập</a>
                         </div>
                     </div>
                 </div>
@@ -16,7 +19,7 @@
 
                 <div class="modal-dialog ">
 		<div class="modal-content ">
-			<form method="post" action="login" id="frm-login">
+			<form method="post" action="${link }login" id="frm-login">
 				<div class="modal-body ">
 					<div id="err_login"></div>
 					<div id="login_here">

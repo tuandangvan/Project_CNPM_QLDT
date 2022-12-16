@@ -15,19 +15,18 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 	public void insert(CouncilDetailsModel councildetail) {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
-				String sql = "INSERT INTO CouncilDetails(CouncilId, teacherId) VALUES (?,?)";
-				try {
-					Connection con = super.getConnection();
-					PreparedStatement ps = con.prepareStatement(sql);
-					
-					ps.setInt(1, councildetail.getCouncilId());
-					ps.setInt(2, councildetail.getTeacherId());
-					
-					
-					ps.executeUpdate();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		String sql = "INSERT INTO CouncilDetails(CouncilId, teacherId) VALUES (?,?)";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ps.setInt(1, councildetail.getCouncilId());
+			ps.setInt(2, councildetail.getTeacherId());
+
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -48,18 +47,19 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 		}
 	}
 
+	// Xóa teacher khỏi hội đồng chấm thi
 	@Override
-	public void delete(int id) {
-		String sql = "DELETE FROM councildetail WHERE councildetailId = ?";
+	public void delete(int councilId, int teacherId) {
+		String sql = "DELETE FROM CouncilDetails\r\n" + "WHERE CouncilId = ? and teacherId = ? ";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, id);
+			ps.setInt(1, councilId);
+			ps.setInt(2, teacherId);
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -177,10 +177,10 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 		}
 		return councildetailers;
 	}
-	
+
 	@Override
 	public List<CouncilDetailsModel> getAllByTeacher(int teacherId) {
-		List<CouncilDetailsModel> councildetailers= new ArrayList<CouncilDetailsModel>();
+		List<CouncilDetailsModel> councildetailers = new ArrayList<CouncilDetailsModel>();
 		String sql = "SELECT * FROM CouncilDetails where teacherId=?";
 		try {
 			Connection con = super.getConnection();
@@ -189,13 +189,13 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				CouncilDetailsModel councildetailer = new CouncilDetailsModel();
-				
+
 				councildetailer.setCouncilId(rs.getInt("CouncilId"));
 				councildetailer.setTeacherId(rs.getInt("teacherId"));
 				councildetailer.setLeader(rs.getBoolean("leader"));
 				councildetailer.setId(rs.getInt("id"));
 				councildetailer.setScores(rs.getFloat("Scores"));
-				
+
 				councildetailers.add(councildetailer);
 			}
 		} catch (Exception e) {
@@ -203,10 +203,10 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 		}
 		return councildetailers;
 	}
-	
+
 	@Override
 	public List<CouncilDetailsModel> getAllByCouncilId(int councilId) {
-		List<CouncilDetailsModel> councildetailers= new ArrayList<CouncilDetailsModel>();
+		List<CouncilDetailsModel> councildetailers = new ArrayList<CouncilDetailsModel>();
 		String sql = "SELECT * FROM CouncilDetails where councilId=?";
 		try {
 			Connection con = super.getConnection();
@@ -229,4 +229,6 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 		}
 		return councildetailers;
 	}
+	
+	
 }

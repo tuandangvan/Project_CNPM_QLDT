@@ -27,5 +27,7 @@ public interface ITopicDao {
 
 	TopicModel getById(int id);
 
+	void editReport(String linkReport, int topicId);
+
 
 }

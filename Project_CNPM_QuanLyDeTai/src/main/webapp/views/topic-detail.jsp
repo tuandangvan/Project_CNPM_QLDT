@@ -68,7 +68,9 @@
                 </tr>
                 <tr class="warning">
                     <td>GV phản biện</td>
-                    <td></td>
+                    <td><c:forEach items="${teacherPbs }" var="tc">
+							<span class="text-info">${tc.teacherName }</span><br>
+							</c:forEach></td>
                 </tr>
                 <tr>
                     <td>Điểm đề tài</td>
