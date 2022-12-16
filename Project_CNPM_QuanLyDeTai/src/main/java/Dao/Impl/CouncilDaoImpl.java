@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
 
 import Connection.DBConnection;
 import Dao.ICouncilDao;
@@ -15,17 +14,11 @@ public class CouncilDaoImpl extends DBConnection implements ICouncilDao{
 	@Override
 	public void insert(CouncilModel council) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO council(councilName,gender,birth,email,phone) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO council(topicId,AverageScore) VALUES (?,-1)";
 		try {
 			Connection con = super.getConnection();
-			PreparedStatement ps = con.prepareStatement(sql);
-			
-//			ps.setString(1, council.getcouncilName());
-//			ps.setBoolean(2, council.getGender());
-//			ps.setDate(3, council.getBirth());
-//			ps.setInt(6, council.getcouncilId());
-			
-			
+			PreparedStatement ps = con.prepareStatement(sql);		
+			ps.setInt(1, council.getTopicId());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -131,6 +124,44 @@ public class CouncilDaoImpl extends DBConnection implements ICouncilDao{
 //				counciler.setCreatedAt(rs.getDate("createdAt"));
 //				counciler.setPrice(rs.getBigDecimal("price"));
 				
+				return counciler;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public String checkTopicId(int topicId) {
+		String sql = "select topicId from Council where topicId = ? ";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, topicId);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				return rs.getString(1);	
+			}			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public CouncilModel getById(int id) {
+		String sql = "SELECT * FROM council WHERE id = ? ";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				CouncilModel counciler = new CouncilModel();
+
+				counciler.setId(rs.getInt("id"));
+				counciler.setTopicId(rs.getInt("topicId"));
+				counciler.setAverageScore(rs.getFloat("AverageScore"));
 				return counciler;
 			}
 		} catch (Exception e) {

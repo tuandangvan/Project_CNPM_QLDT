@@ -18,4 +18,8 @@ public interface ITeachersDao {
 
 	TeachersModel findById(int id);
 
+	TeachersModel getByUser(String user);
+
+	List<TeachersModel> getAllTeacherCouncil(int teacherId);
+
 }

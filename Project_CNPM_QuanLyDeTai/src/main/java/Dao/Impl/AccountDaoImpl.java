@@ -63,12 +63,11 @@ public class AccountDaoImpl extends DBConnection implements IAccountDao{
 	}
 
 	@Override
-	public AccountModel get(int id) {
-		String sql = "SELECT * FROM Account WHERE username = ? ";
+	public AccountModel get(String username) {
+		String sql = "SELECT * FROM Account WHERE username = '" + username +"' ";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				AccountModel accounter = new AccountModel();

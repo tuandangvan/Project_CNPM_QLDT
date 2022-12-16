@@ -11,29 +11,27 @@ import Connection.DBConnection;
 import Dao.ICouncilDetailsDao;
 import Models.CouncilDetailsModel;
 
-public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetailsDao{
+public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetailsDao {
 	@Override
 	public void insert(CouncilDetailsModel councildetail) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO councildetail(councildetailName,gender,birth,email,phone) VALUES (?,?,?,?,?)";
-		try {
-			Connection con = super.getConnection();
-			PreparedStatement ps = con.prepareStatement(sql);
-			
-//			ps.setString(1, councildetail.getcouncildetailName());
-//			ps.setBoolean(2, councildetail.getGender());
-//			ps.setDate(3, councildetail.getBirth());
-//			ps.setInt(6, councildetail.getcouncildetailId());
-			
-			
-			ps.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// TODO Auto-generated method stub
+				String sql = "INSERT INTO CouncilDetails(CouncilId, teacherId) VALUES (?,?)";
+				try {
+					Connection con = super.getConnection();
+					PreparedStatement ps = con.prepareStatement(sql);
+					
+					ps.setInt(1, councildetail.getCouncilId());
+					ps.setInt(2, councildetail.getTeacherId());
+					
+					
+					ps.executeUpdate();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
 	}
-	
-	
+
 	@Override
 	public void edit(CouncilDetailsModel councildetail) {
 		String sql = "UPDATE  councildetail SET councildetailName=?, gender=?, birth=? email=?, phone=? WHERE councildetailId=?";
@@ -44,7 +42,7 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 //			ps.setBoolean(2, councildetail.getGender());
 //			ps.setDate(3, councildetail.getBirth());
 //			ps.setInt(6, councildetail.getcouncildetailId());
-			
+
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,7 +60,7 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
@@ -80,7 +78,7 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 //				councildetailer.setcouncildetailId(rs.getInt("councildetailId"));
 //				councildetailer.setCreatedAt(rs.getDate("createdAt"));
 //				councildetailer.setPrice(rs.getBigDecimal("price"));
-		
+
 				return councildetailer;
 			}
 		} catch (Exception e) {
@@ -91,7 +89,7 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 
 	@Override
 	public List<CouncilDetailsModel> getAll() {
-		List<CouncilDetailsModel> councildetailers= new ArrayList<CouncilDetailsModel>();
+		List<CouncilDetailsModel> councildetailers = new ArrayList<CouncilDetailsModel>();
 		String sql = "SELECT * FROM councildetail";
 		try {
 			Connection con = super.getConnection();
@@ -99,13 +97,13 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				CouncilDetailsModel councildetailer = new CouncilDetailsModel();
-				
+
 //				councildetailer.setcouncildetailId(rs.getInt("councildetailId"));
 //				councildetailer.setcouncildetailName(rs.getString(id));
 //				councildetailer.setcouncildetailId(rs.getInt("councildetailId"));
 //				councildetailer.setCreatedAt(rs.getDate("createdAt"));
 //				councildetailer.setPrice(rs.getBigDecimal("price"));
-				
+
 				councildetailers.add(councildetailer);
 			}
 		} catch (Exception e) {
@@ -130,7 +128,7 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 //				councildetailer.setcouncildetailId(rs.getInt("councildetailId"));
 //				councildetailer.setCreatedAt(rs.getDate("createdAt"));
 //				councildetailer.setPrice(rs.getBigDecimal("price"));
-				
+
 				return councildetailer;
 			}
 		} catch (Exception e) {
@@ -138,5 +136,72 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 		}
 		return null;
 	}
+
+	@Override
+	public String findByCouncilId(int topicId) {
+		String sql = "select id from Council where topicId = ? ";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, topicId);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				return rs.getString(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<CouncilDetailsModel> getAllTeacherByCouncilId(int councilId) {
+		List<CouncilDetailsModel> councildetailers = new ArrayList<CouncilDetailsModel>();
+		String sql = "select CouncilDetails.CouncilId, CouncilDetails.teacherId, Teachers.teacherName\r\n"
+				+ "from Council, CouncilDetails, Teachers \r\n"
+				+ "where CouncilDetails.CouncilId = Council.id and CouncilDetails.teacherId = Teachers.teacherId\r\n"
+				+ "and CouncilDetails.CouncilId = ?";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, councilId);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				CouncilDetailsModel councildetailer = new CouncilDetailsModel();
+				councildetailer.setCouncilId(rs.getInt(1));
+				councildetailer.setTeacherId(rs.getInt(2));
+				councildetailer.setTeacherName(rs.getString(3));
+				councildetailers.add(councildetailer);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return councildetailers;
+	}
 	
+	@Override
+	public List<CouncilDetailsModel> getAllByTeacher(int teacherId) {
+		List<CouncilDetailsModel> councildetailers= new ArrayList<CouncilDetailsModel>();
+		String sql = "SELECT * FROM CouncilDetails where teacherId=?";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, teacherId);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				CouncilDetailsModel councildetailer = new CouncilDetailsModel();
+				
+				councildetailer.setCouncilId(rs.getInt("CouncilId"));
+				councildetailer.setTeacherId(rs.getInt("teacherId"));
+				councildetailer.setLeader(rs.getBoolean("leader"));
+				councildetailer.setId(rs.getInt("id"));
+				councildetailer.setScores(rs.getFloat("Scores"));
+				
+				councildetailers.add(councildetailer);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return councildetailers;
+	}
 }

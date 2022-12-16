@@ -16,9 +16,19 @@ public class SignUpModel {
 	private int yEnd;
 	private int mEnd;
 	private int dEnd;
+
 	public SignUpModel() {
 		super();
 	}
+
+	public SignUpModel(int signUpId, Date startTime, Date endTime, boolean role) {
+		super();
+		this.signUpId = signUpId;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.role = role;
+	}
+	
 	public SignUpModel(int signUpId, Date startTime, Date endTime, Boolean role, int yStart, int mStart, int dStart,
 			int yEnd, int mEnd, int dEnd) {
 		super();

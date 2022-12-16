@@ -18,5 +18,7 @@ public interface ISignUpDao {
 
 	void edit(SignUpModel signup);
 	SignUpModel getTop();
+
+	SignUpModel getLast();
 	
 }

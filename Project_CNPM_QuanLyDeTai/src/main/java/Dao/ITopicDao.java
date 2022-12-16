@@ -18,4 +18,10 @@ public interface ITopicDao {
 
 	TopicModel findById(int id);
 
+	List<TopicModel> findTopicByEmail(String email);
+
+	List<TopicModel> getAllByTeacher(int teacherId);
+
+	TopicModel getById(int id);
+
 }

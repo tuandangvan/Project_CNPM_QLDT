@@ -18,4 +18,8 @@ public interface ICouncilDao {
 
 	CouncilModel findById(int id);
 
+	String checkTopicId(int topicId);
+
+	CouncilModel getById(int id);
+
 }
