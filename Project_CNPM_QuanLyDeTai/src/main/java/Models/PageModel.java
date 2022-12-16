@@ -2,6 +2,7 @@ package Models;
 
 public class PageModel {
 	private int page;
+	private int element;
 
 	public PageModel() {
 		super();
@@ -20,5 +21,14 @@ public class PageModel {
 	public void setPage(int page) {
 		this.page = page;
 	}
+
+	public int getElement() {
+		return element;
+	}
+
+	public void setElement(int element) {
+		this.element = element;
+	}
+	
 	
 }

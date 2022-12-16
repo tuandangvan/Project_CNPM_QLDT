@@ -29,7 +29,7 @@
 		</div>
 		<div class="panel-body">
 			<div class="text-center">
-				<p class="badge red">Tổng số mẩu tin : 0</p>
+				<p class="badge red">Tổng số mẩu tin : ${amountPage.element }</p>
 			</div>
 			<table class="table demo tablet breakpoint footable-loaded footable"
 				data-page-size="5">
@@ -87,7 +87,7 @@
 		</div>
 		<div class="panel-body">
 			<div class="text-center">
-				<p class="badge red">Tổng số mẩu tin : 0</p>
+				<p class="badge red">Tổng số mẩu tin : ${amountPage.element } </p>
 			</div>
 			<table class="table demo tablet footable-loaded footable"
 				data-page-size="5">
@@ -143,7 +143,7 @@
 		<div class="panel-body">
 
 			<div class="text-center">
-				<p class="badge red">Tổng số mẩu tin : 0</p>
+				<p class="badge red">Tổng số mẩu tin : ${amountPage.element }</p>
 			</div>
 			<table class="table demo footable-loaded footable tablet breakpoint"
 				data-page-size="5">
