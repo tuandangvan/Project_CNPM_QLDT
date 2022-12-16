@@ -101,7 +101,6 @@
                                     else {
                                         $("#login_here").hide();
                                         $(".modal-footer").hide();
-
                                         $('#err_login').html('<div class="alert alert-success"><strong>Đăng nhập thành công</strong><span> Hệ thống tự chuyển sau vài giây ...</span></div>');
                                         setTimeout(
                                            //chuyển đến địa chỉ msg_login của controler gửi qua

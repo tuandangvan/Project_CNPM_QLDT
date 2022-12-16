@@ -6,6 +6,8 @@ public class CouncilDetailsModel {
 	private int teacherId;
 	private Boolean leader;
 	private float Scores;
+	private String teacherName;
+	
 	public CouncilDetailsModel() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -47,6 +49,12 @@ public class CouncilDetailsModel {
 	}
 	public void setScores(float scores) {
 		Scores = scores;
+	}
+	public String getTeacherName() {
+		return teacherName;
+	}
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
 	}
 	
 }

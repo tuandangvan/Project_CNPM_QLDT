@@ -142,5 +142,58 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao{
 		}
 		return null;
 	}
+	@Override
+	public TeachersModel getByUser(String user) {
+		String sql = "SELECT * FROM teachers WHERE email = ? ";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, user);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				int teacherId = rs.getInt("teacherId");
+			    String teacherName = rs.getString("teacherName");
+			    Boolean gender = rs.getBoolean("gender");
+			    Date birth  = rs.getDate("birth");;
+			    String email = rs.getString("email");
+			    String phone = rs.getString("phone");
+				int majorId = rs.getInt("majorId");
+				
+				return new TeachersModel(teacherId,teacherName,gender,birth,email,phone,majorId);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public List<TeachersModel> getAllTeacherCouncil(int teacherId) {
+		List<TeachersModel> teachers= new ArrayList<TeachersModel>();
+		String sql = "SELECT Teachers.teacherId, Teachers.teacherName, Teachers.email, Teachers.phone, Majors.majorName\r\n"
+				+ "FROM Teachers, Majors \r\n"
+				+ "Where Teachers.majorId = Majors.majorId";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				TeachersModel teacher = new TeachersModel();
+				
+				if(rs.getInt("teacherId") != teacherId) {
+					teacher.setTeacherId(rs.getInt("teacherId"));
+					teacher.setTeacherName(rs.getString("teacherName"));
+					teacher.setEmail(rs.getString("email"));
+					teacher.setPhone(rs.getString("phone"));
+					teacher.setMajorName(rs.getString("majorName"));
+					
+					teachers.add(teacher);
+				}				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return teachers;
+	}
 	
 }

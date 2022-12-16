@@ -18,4 +18,6 @@ public interface IStudentsDao {
 
 	List<StudentsModel> getAll();
 
+	StudentsModel findStudentByEmail(String email);
+
 }

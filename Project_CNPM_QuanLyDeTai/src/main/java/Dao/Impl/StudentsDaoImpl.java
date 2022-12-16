@@ -147,4 +147,30 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 		return null;
 	}
 	
+	@Override
+	public StudentsModel findStudentByEmail(String email) {
+		String sql = "SELECT * FROM students WHERE email = ? ";
+		try {
+			Connection conn = super.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				StudentsModel student = new StudentsModel(
+						rs.getInt(1),
+						rs.getString(2),
+						rs.getBoolean(3),
+						rs.getDate(4),
+						rs.getString(5),
+						rs.getString(6),
+						rs.getString(7),
+						rs.getInt(8));
+				return student;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }

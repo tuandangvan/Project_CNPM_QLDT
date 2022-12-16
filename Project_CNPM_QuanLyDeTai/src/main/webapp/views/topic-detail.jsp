@@ -6,6 +6,7 @@
     <div style="color: rgb(7, 132, 163);" class="panel-heading">
         <h4 style="font-family: verdana;color:rgb(87,87,87);">Chi tiết đề tài</h4>
     </div>
+    <c:if test="${topic.topicId!=null }">
     <div class="panel-body">
         <div id="detail">
             <table class="table table-hover footable-loaded footable">
@@ -143,4 +144,5 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
     </div>
+    </c:if>
 </div>
