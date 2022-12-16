@@ -204,4 +204,30 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 		}
 		return councildetailers;
 	}
+	
+	@Override
+	public List<CouncilDetailsModel> getAllByCouncilId(int councilId) {
+		List<CouncilDetailsModel> councildetailers= new ArrayList<CouncilDetailsModel>();
+		String sql = "SELECT * FROM CouncilDetails where councilId=?";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, councilId);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				CouncilDetailsModel councildetailer = new CouncilDetailsModel();
+
+				councildetailer.setCouncilId(rs.getInt("CouncilId"));
+				councildetailer.setTeacherId(rs.getInt("teacherId"));
+				councildetailer.setLeader(rs.getBoolean("leader"));
+				councildetailer.setId(rs.getInt("id"));
+				councildetailer.setScores(rs.getFloat("Scores"));
+
+				councildetailers.add(councildetailer);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return councildetailers;
+	}
 }

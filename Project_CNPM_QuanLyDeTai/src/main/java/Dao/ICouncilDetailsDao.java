@@ -24,4 +24,6 @@ public interface ICouncilDetailsDao {
 
 	List<CouncilDetailsModel> getAllByTeacher(int teacherId);
 
+	List<CouncilDetailsModel> getAllByCouncilId(int councilId);
+
 }

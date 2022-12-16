@@ -70,7 +70,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Đăng nhập</h4>
                         </div>
-                        <form method="post" action="/Home/DangNhap" id="frm-login">
+                        <form method="post" action="/login" id="frm-login">
                             <div class="modal-body">
                                 <div id="err_login"></div>
                                 <div id="login_here">

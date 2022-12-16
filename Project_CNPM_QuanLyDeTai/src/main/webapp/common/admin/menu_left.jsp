@@ -16,30 +16,8 @@
                                     <a href="${link}/list-topic" class="list-group-item "><img src="<c:url value="/assets/public/images/Actions-view-calendar-list-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Danh sách đề tài</a>
                                     <a href="${link}/singUp/add" class="list-group-item "><img src="<c:url value="/assets/public/images/Actions-document-edit-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Tạo đợt đăng ký</a>
                                     <a href="${link}/Council" class="list-group-item "><img src="<c:url value="/assets/public/images/Actions-document-edit-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Tạo hội đồng chấm thi</a>
+                                    <a href="./logout" class="list-group-item"><img src="<c:url value="/assets/public/images/Apps-session-logout-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Đăng xuất</a>
                                 </div><!-- /panel-default -->
-                                <div class="panel panel-default">
-									<div class="panel-heading">
-                    					<h4 id="mobile_sinhvien">Sinh viên</h4>
-                					</div>
-					                <a href="${link}/info" class="list-group-item"><img src="<c:url value="/assets/public/images/Student-3-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Quản trị tài khoản</a>
-					                <a href="/Home/ThongTinGiangVien" class="list-group-item "><img src="<c:url value="/assets/public/images/Teacher-icon.png"/>" width="24" height="24" /><span class="pull-right"></span> Thông tin giảng viên</a>
-					                <a href="/SinhVien/LoaiDeTai" class="list-group-item  "><img src="<c:url value="/assets/public/images/Actions-document-edit-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Đăng ký đề tài</a>
-					                <a href="/SinhVien/QuanLyNhom" class="list-group-item  "><img src="<c:url value="/assets/public/images/user-group-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Quản lý nhóm</a>
-					                <a href="/SinhVien/BaoCaoLoaiDetai" class="list-group-item  "><img src="<c:url value="/assets/public/images/Documents-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Quản lý báo cáo</a>					                
-					                <a href="/Home/DangXuat" class="list-group-item"><img src="<c:url value="/assets/public/images/Apps-session-logout-icon.png"/>" width="24" height="24"><span class="pull-right"></span> Đăng xuất</a>
-               			 			<div class="modal fade" id="change_info">
-                   	 					<div class="modal-dialog">
-                        					<div class="modal-content">
-
-                        					</div><!-- /.modal-content -->
-                    					</div><!-- /.modal-dialog -->
-			                		</div><!-- /.modal -->
-			            		</div>
-
-                                
-
-
-
                                 <!--============================Bench==================-->
                                 
                             <!-- Modal Who online -->

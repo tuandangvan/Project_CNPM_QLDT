@@ -17,7 +17,7 @@ import Models.TopicDetailsModel;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = {"/student/register"})
-public class RegisterTopicLeaderController extends HttpServlet{
+public class RegisterTopicController extends HttpServlet{
 
 	IStudentsDao studentsDao = new StudentsDaoImpl();
 	ITopicDetailsDao topicDetailsDao = new TopicDetailsDaoImpl();
