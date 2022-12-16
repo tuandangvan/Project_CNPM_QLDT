@@ -22,43 +22,47 @@ import Models.CouncilModel;
 import Models.TeachersModel;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = {"/admin/Council/create"})
-public class CreateCouncilAdminController extends HttpServlet{
+@WebServlet(urlPatterns = { "/admin/Council/create" })
+public class CreateCouncilAdminController extends HttpServlet {
 
 	ICouncilDao councilDao = new CouncilDaoImpl();
 	ITeachersDao teachersDao = new TeachersDaoImpl();
 	ICouncilDetailsDao detailsDao = new CouncilDetailsDaoImpl();
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String teacherId = req.getParameter("id");
-		String topicId =  req.getParameter("topicId");
-		
-		String councilId = detailsDao.findByCouncilId(Integer.parseInt(topicId));
-		
-		String checkTopic = councilDao.checkTopicId(Integer.parseInt(topicId));
-		//Tạo hội đồng
-		if(checkTopic == null) {
-			CouncilModel council = new CouncilModel();
-			council.setTopicId(Integer.parseInt(req.getParameter("topicId")));
-			councilDao.insert(council);
+		try {
+			String teacherId = req.getParameter("id");
+			String topicId = req.getParameter("topicId");
+
+			String councilId = detailsDao.findByCouncilId(Integer.parseInt(topicId));
+
+			String checkTopic = councilDao.checkTopicId(Integer.parseInt(topicId));
+			// Tạo hội đồng
+			if (checkTopic == null) {
+				CouncilModel council = new CouncilModel();
+				council.setTopicId(Integer.parseInt(req.getParameter("topicId")));
+				councilDao.insert(council);
+			}
+			// List giảng viên có thể được chấm điểm
+			List<TeachersModel> listTeacher = new ArrayList<TeachersModel>();
+			listTeacher = teachersDao.getAllTeacherCouncil(Integer.parseInt(teacherId));
+			req.setAttribute("listTeacher", listTeacher);
+
+			// List giảng viên đã được chọn
+			List<CouncilDetailsModel> councilDetailst = new ArrayList<CouncilDetailsModel>();
+			councilDetailst = detailsDao.getAllTeacherByCouncilId(Integer.parseInt(councilId));
+			req.setAttribute("details", councilDetailst);
+
+			req.setAttribute("councilId", councilId);
+			req.setAttribute("teachReturn", teacherId);
+			req.setAttribute("topicReturn", topicId);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		//List giảng viên có thể được chấm điểm
-		List<TeachersModel> listTeacher = new ArrayList<TeachersModel>();
-		listTeacher = teachersDao.getAllTeacherCouncil(Integer.parseInt(teacherId));
-		req.setAttribute("listTeacher", listTeacher);
-		
-		//List giảng viên đã được chọn
-		List<CouncilDetailsModel> councilDetailst = new ArrayList<CouncilDetailsModel>();
-		councilDetailst = detailsDao.getAllTeacherByCouncilId(Integer.parseInt(councilId));
-		req.setAttribute("details", councilDetailst);
-		
-		req.setAttribute("councilId", councilId);
-		req.setAttribute("teachReturn", teacherId);
-		req.setAttribute("topicReturn", topicId);
-		
+
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/admin/list-AbleCouncil.jsp");
 		dispatcher.forward(req, resp);
 	}
-	
+
 }

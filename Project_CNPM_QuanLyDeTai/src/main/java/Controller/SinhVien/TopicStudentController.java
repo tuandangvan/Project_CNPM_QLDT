@@ -44,43 +44,44 @@ public class TopicStudentController extends HttpServlet {
 
 		if ((now.compareTo(signUpModel.getStartTime()) > 0 || now.compareTo(signUpModel.getStartTime()) == 0)
 				&& (now.compareTo(signUpModel.getEndTime()) < 0 || now.compareTo(signUpModel.getEndTime()) == 0)) {
-			HttpSession session = req.getSession();
-			if (session != null && session.getAttribute("account") != null) {
-				AccountModel account = (AccountModel) session.getAttribute("account");
+			if (signUpModel.getRole() == true) {
+				HttpSession session = req.getSession();
+				if (session != null && session.getAttribute("account") != null) {
+					AccountModel account = (AccountModel) session.getAttribute("account");
 
-				// email = 20110300@student.hcmute.edu.vn
-				String email = account.getUsername();
-				req.setAttribute("email", email);
+					// email = 20110300@student.hcmute.edu.vn
+					String email = account.getUsername();
+					req.setAttribute("email", email);
 
-				// lấy đề tài theo chuyên ngành
-				List<TopicModel> topics = new ArrayList<TopicModel>();
-				topics = topicDao.findTopicByEmail(email);
+					// lấy đề tài theo chuyên ngành
+					List<TopicModel> topics = new ArrayList<TopicModel>();
+					topics = topicDao.findTopicByEmail(email);
 
-				// tìm danh sách topicdetail theo topicid
+					// tìm danh sách topicdetail theo topicid
 
-				for (TopicModel topic : topics) {
-					List<TopicDetailsModel> topicdetails = new ArrayList<TopicDetailsModel>();
-					topicdetails = topicDetailsDao.findTopicDetailByTopicId(topic.getTopicId());
-					topic.setQuantityRegister(topicdetails.size());
-					for (TopicDetailsModel topicdetail : topicdetails) {
-						if (topicdetail.getStudentId() == studentsDao.findStudentByEmail(email).getStudentId()) {
-							req.setAttribute("equal", 1);
+					for (TopicModel topic : topics) {
+						List<TopicDetailsModel> topicdetails = new ArrayList<TopicDetailsModel>();
+						topicdetails = topicDetailsDao.findTopicDetailByTopicId(topic.getTopicId());
+						topic.setQuantityRegister(topicdetails.size());
+						for (TopicDetailsModel topicdetail : topicdetails) {
+							if (topicdetail.getStudentId() == studentsDao.findStudentByEmail(email).getStudentId()) {
+								req.setAttribute("equal", 1);
+							}
+
 						}
-
 					}
-				}
 
-				req.setAttribute("topics", topics);
-				RequestDispatcher dispatcher = req.getRequestDispatcher("/views/sinhvien/list-topics-register.jsp");
-				dispatcher.forward(req, resp);
-			}
-			else {
+					req.setAttribute("topics", topics);
+					RequestDispatcher dispatcher = req.getRequestDispatcher("/views/sinhvien/list-topics-register.jsp");
+					dispatcher.forward(req, resp);
+				}
+			} else {
 				req.setAttribute("message", "Không nằm trong thời gian đăng ký");
-				req.getRequestDispatcher("/views/teacher/error.jsp").forward(req,resp);
+				req.getRequestDispatcher("/views/teacher/error.jsp").forward(req, resp);
 			}
-		}else {
+		} else {
 			req.setAttribute("message", "Không nằm trong thời gian đăng ký");
-			req.getRequestDispatcher("/views/teacher/error.jsp").forward(req,resp);
+			req.getRequestDispatcher("/views/teacher/error.jsp").forward(req, resp);
 		}
 	}
 
