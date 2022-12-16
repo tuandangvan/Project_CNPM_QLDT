@@ -13,40 +13,7 @@
             </div>
             <!-- ############################ Đăng nhập ############################## -->
             <div class="modal fade" id="dang_nhap">
-<<<<<<< HEAD
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Đăng nhập</h4>	
-                        </div>
-                        <form method="post" action="/Home/DangNhap" id="frm-login">
-                            <div class="modal-body">
-                                <div id="err_login"></div>
-                                <div id="login_here">
-                                    <label>Username : </label>
-                                    <input type="text" class="form-control" name="username" id="username" />
-                                    <label>Password : </label>
-                                    <input type="password" class="form-control" name="password" id="password" />
-                                    <br />
-                                    <a href="/Home/QuenMatKhau" class="text-danger">Quên mật khẩu</a>
-                                </div>
-                                <br />
-                                <div id="waiting" style="display: none;">
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" id="login_btn">Đăng nhập</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </form>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-=======
+
                 <div class="modal-dialog ">
 		<div class="modal-content ">
 			<form method="post" action="login" id="frm-login">
@@ -80,7 +47,7 @@
 		</div>
 		</div>
 		</div><!-- /.modal -->
->>>>>>> e853bfb12e99980caef133e5abe94d2f39cd9c14
+
             <!-- ===================================Thông tin người dùng=========================-->
             <div class="modal fade" id="thong_tin">
                 <div class="modal-dialog">

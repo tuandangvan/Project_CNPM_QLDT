@@ -23,7 +23,6 @@ import Dao.Impl.StudentsDaoImpl;
 import Dao.Impl.TeachersDaoImpl;
 import Dao.Impl.TopicDaoImpl;
 import Dao.Impl.TopicDetailsDaoImpl;
-import Models.MajorsModel;
 import Models.SignUpModel;
 import Models.StudentsModel;
 import Models.TeachersModel;

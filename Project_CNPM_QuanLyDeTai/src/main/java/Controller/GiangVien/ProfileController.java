@@ -1,13 +1,18 @@
 package Controller.GiangVien;
 
 import Dao.IMajorsDao;
+import Dao.ISignUpDao;
 import Dao.ITeachersDao;
 import Dao.Impl.MajorsDaoImpl;
+import Dao.Impl.SignUpDaoImpl;
 import Dao.Impl.TeachersDaoImpl;
 import Models.AccountModel;
+import Models.SignUpModel;
 import Models.TeachersModel;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +41,9 @@ public class ProfileController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		ISignUpDao signUp = new SignUpDaoImpl();
+		List<SignUpModel> signs = signUp.getAll();
+		request.setAttribute("signs",signs);
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");

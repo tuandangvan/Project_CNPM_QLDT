@@ -1,14 +1,19 @@
 package Controller.GiangVien;
 
+import Dao.ISignUpDao;
 import Dao.IStudentsDao;
 import Dao.ITopicDao;
 import Dao.ITopicDetailsDao;
+import Dao.Impl.SignUpDaoImpl;
 import Dao.Impl.StudentsDaoImpl;
 import Dao.Impl.TopicDaoImpl;
 import Dao.Impl.TopicDetailsDaoImpl;
+import Models.SignUpModel;
 import Models.TopicModel;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +39,9 @@ public class ManagerTopicController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ISignUpDao signUp = new SignUpDaoImpl();
+		List<SignUpModel> signs = signUp.getAll();
+		request.setAttribute("signs",signs);
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");

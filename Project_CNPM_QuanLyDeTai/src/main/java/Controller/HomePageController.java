@@ -19,6 +19,7 @@ import Models.SignUpModel;
 public class HomePageController extends HttpServlet{
 	
 	ISignUpDao signUp = new SignUpDaoImpl();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<SignUpModel> signs = signUp.getAll();

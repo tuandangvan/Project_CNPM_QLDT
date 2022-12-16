@@ -137,20 +137,23 @@ public class TopicDaoImpl extends DBConnection implements ITopicDao{
 		return null;
 	}
 	
-	public List<TopicModel> getListSearh(String key, int pageid) {
+	public List<TopicModel> getListSearh(String key, int idPage) {
 		List<TopicModel> topics = new ArrayList<TopicModel>();
-		String sql = "DECLARE @value nvarchar(50)\r\n" + "set @value= N'%" + key + "%'\r\n"
-				+ "Select distinct Topic.topicId, Topic.topicName,\r\n"
+		String sql = "DECLARE @value nvarchar(50)\r\n"
+				+ "set @value= N'%"+key+"%'\r\n"
+				+ "Select distinct Topic.topicId, Topic.topicName, Majors.majorName,\r\n"
 				+ "(select Teachers.teacherName From Teachers WHERE Teachers.teacherId = Topic.teacherId) as teacherName,\r\n"
 				+ "(select count(topicId) from TopicDetails Where Topic.topicId = TopicDetails.topicId) as count\r\n"
-				+ "from Topic, Teachers\r\n" 
-				+ "where Topic.topicName like @value \r\n" + "or teacherName like @value \r\n"
-				+ "ORDER BY Students.studentId\r\n"
+				+ "from Topic, Teachers, Majors\r\n"
+				+ "where (Topic.topicName like @value or teacherName like @value)\r\n"
+				+ "and Teachers.teacherId =Topic.teacherId and Teachers.majorId =Majors.majorId\r\n"
+				+ "ORDER BY Topic.topicId\r\n"
 				+ "OFFSET (?-1)*10 ROWS\r\n"
 				+ "FETCH FIRST 10 ROWS ONLY";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, idPage);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				TopicModel topic = new TopicModel();
@@ -159,6 +162,7 @@ public class TopicDaoImpl extends DBConnection implements ITopicDao{
 				topic.setTopicName(rs.getString("topicName"));
 				topic.setTeacherName(rs.getString("teacherName"));
 				topic.setCount(rs.getInt("count"));
+				topic.setMajorName(rs.getString("majorName"));
 
 				topics.add(topic);
 			}

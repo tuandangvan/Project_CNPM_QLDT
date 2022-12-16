@@ -12,16 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Dao.IMajorsDao;
+import Dao.ISignUpDao;
 import Dao.IStudentsDao;
 import Dao.ITeachersDao;
 import Dao.ITopicDao;
 import Dao.ITopicDetailsDao;
 import Dao.Impl.MajorsDaoImpl;
+import Dao.Impl.SignUpDaoImpl;
 import Dao.Impl.StudentsDaoImpl;
 import Dao.Impl.TeachersDaoImpl;
 import Dao.Impl.TopicDaoImpl;
 import Dao.Impl.TopicDetailsDaoImpl;
-import Models.MajorsModel;
+import Models.SignUpModel;
 import Models.StudentsModel;
 import Models.TeachersModel;
 import Models.TopicDetailsModel;
@@ -39,6 +41,9 @@ public class TopicDetailController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ISignUpDao signUp = new SignUpDaoImpl();
+		List<SignUpModel> signs = signUp.getAll();
+		req.setAttribute("signs",signs);
 		
 		//lấy topicId
 		String topicId = req.getParameter("id");

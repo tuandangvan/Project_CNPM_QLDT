@@ -62,11 +62,11 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 
 	@Override
 	public SignUpModel get(int id) {
-		String sql = "select  startTime, signUpId,startTime,endTime,role , \r\n"
+		String sql = "select startTime, signUpId,endTime,role,\r\n"
 				+ "YEAR(startTime) as yStart, MONTH(startTime) as mStart, DAY(startTime) as dStart,\r\n"
 				+ "YEAR(endTime) as yEnd, MONTH(endTime) as mEnd, DAY(endTime) as dEnd\r\n"
 				+ "from SignUp\r\n"
-				+ "where SignUp.signUpId =?\r\n"
+				+ "where signUpId=?\r\n"
 				+ "ORDER BY SignUp.startTime desc ";
 		try {
 			Connection con = super.getConnection();

@@ -1,6 +1,7 @@
 package Controller.SinhVien;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,10 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Dao.ISignUpDao;
 import Dao.IStudentsDao;
 import Dao.ITopicDetailsDao;
+import Dao.Impl.SignUpDaoImpl;
 import Dao.Impl.StudentsDaoImpl;
 import Dao.Impl.TopicDetailsDaoImpl;
+import Models.SignUpModel;
 import Models.StudentsModel;
 import Models.TopicDetailsModel;
 
@@ -23,6 +27,9 @@ public class RegisterTopicController extends HttpServlet{
 	ITopicDetailsDao topicDetailsDao = new TopicDetailsDaoImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ISignUpDao signUp = new SignUpDaoImpl();
+		List<SignUpModel> signs = signUp.getAll();
+		req.setAttribute("signs",signs);
 		String email = req.getParameter("email");
 		String topicId = req.getParameter("topicId");
 		String leader = req.getParameter("leader");
