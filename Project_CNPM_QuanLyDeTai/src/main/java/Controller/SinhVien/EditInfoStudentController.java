@@ -2,6 +2,7 @@ package Controller.SinhVien;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Dao.ISignUpDao;
 import Dao.IStudentsDao;
+import Dao.Impl.SignUpDaoImpl;
 import Dao.Impl.StudentsDaoImpl;
+import Models.SignUpModel;
 import Models.StudentsModel;
 
 @SuppressWarnings("serial")
@@ -21,6 +25,9 @@ public class EditInfoStudentController extends HttpServlet{
 	IStudentsDao studentsDao = new StudentsDaoImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ISignUpDao signUp = new SignUpDaoImpl();
+		List<SignUpModel> signs = signUp.getAll();
+		req.setAttribute("signs",signs);
 		String studentId =req.getParameter("id");
 		StudentsModel student = studentsDao.findById(Integer.valueOf(studentId));
 		req.setAttribute("student", student);

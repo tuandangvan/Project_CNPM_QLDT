@@ -158,7 +158,7 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 				+ "where TopicDetails.studentId = Students.studentId and TopicDetails.topicId=Topic.topicId) as topicName\r\n"
 				+ "from Students, Majors\r\n"
 				+ "where Students.studentName like @value or Students.studentId  like @value \r\n"
-				+ "or Students.phone  like @value or majorName  like @value\r\n"
+				+ "or Students.phone like @value or majorName  like @value\r\n"
 				+ "ORDER BY Students.studentId\r\n"
 				+ "OFFSET (?-1)*10 ROWS\r\n"
 				+ "FETCH FIRST 10 ROWS ONLY";

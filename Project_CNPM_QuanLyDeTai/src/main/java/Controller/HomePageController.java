@@ -18,9 +18,10 @@ import Models.SignUpModel;
 @WebServlet(urlPatterns = {"/home","/student/home","/teacher/home","/admin/home"})
 public class HomePageController extends HttpServlet{
 	
-	ISignUpDao signUp = new SignUpDaoImpl();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ISignUpDao signUp = new SignUpDaoImpl();
 		List<SignUpModel> signs = signUp.getAll();
 		req.setAttribute("signs",signs);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/home.jsp");

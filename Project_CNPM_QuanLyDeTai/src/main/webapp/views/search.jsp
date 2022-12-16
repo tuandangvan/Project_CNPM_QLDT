@@ -16,11 +16,10 @@
 		});
 	</script>
 	<script>
-	function getlink(){
-		var linknow = location.href;
-		return linknow;
-	}
-		
+		function getlink() {
+			var linknow = location.href;
+			return linknow;
+		}
 	</script>
 	<div class="panel panel-default" id="timkiemsinhvien"
 		style="display: none">
@@ -117,7 +116,7 @@
 					</c:forEach>
 				</tbody>
 				<tfoot>
-				<tr>
+					<tr>
 						<td colspan="5">
 							<div class="pagination pagination-centered">
 								<div class="pagination-container">
@@ -152,13 +151,11 @@
 					<tr>
 						<th data="true" class="footable-first-column">Tên đề tài</th>
 						<th>GVHD</th>
-						<th data-hide="phone,tablet" style="display: none;">Chuyên
-							ngành</th>
-						<th data-hide="phone,tablet" style="display: none;">Tình
-							trạng</th>
+						<th>Chuyên Ngành</th>
+					
 						<th data-hide="phone" class="footable-last-column">Số lượng
 							SV</th>
-						<th data-hide="phone,tablet" style="display: none;">More info</th>
+						<th>   </th>
 					</tr>
 				</thead>
 				<tbody>
@@ -167,9 +164,11 @@
 							<td class="footable-first-column"><span
 								class="footable-toggle"></span>${topi.topicName}</td>
 							<td>${topi.teacherName}</td>
+							<td>${topi.majorName}</td>
 
 							<td class="footable-last-column"><span class="badge green">${topi.count}</span>
 								/ <span class="badge red"> 3</span></td>
+							<td> <a target="_blank" href="./topicdetail?id=${topi.topicId }" class="btn btn-info btn-sm"> Chi tiết</a></td>
 
 						</tr>
 					</c:forEach>

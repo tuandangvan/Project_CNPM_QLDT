@@ -14,6 +14,7 @@ public class TopicModel {
 	//HuydzPRo
 	private String teacherName;
 	private int count;
+	private String majorName;
 
 	private Date createAt;
 	private String link;
@@ -114,7 +115,12 @@ public class TopicModel {
 	public void setQuantityRegister(int quantityRegister) {
 		this.quantityRegister = quantityRegister;
 	}
-	
+	public String getMajorName() {
+		return majorName;
+	}
+	public void setMajorName(String majorName) {
+		this.majorName = majorName;
+	}
 	
 }
 

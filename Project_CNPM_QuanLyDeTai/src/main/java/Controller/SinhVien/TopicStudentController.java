@@ -37,7 +37,10 @@ public class TopicStudentController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		ISignUpDao signUp = new SignUpDaoImpl();
+		List<SignUpModel> signs = signUp.getAll();
+		req.setAttribute("signs",signs);
+		
 		ISignUpDao signUpDao = new SignUpDaoImpl();
 		SignUpModel signUpModel = signUpDao.getLast();
 		Date now = Date.valueOf(LocalDate.now());
