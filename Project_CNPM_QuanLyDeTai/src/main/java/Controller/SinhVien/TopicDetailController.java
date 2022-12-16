@@ -53,7 +53,7 @@ public class TopicDetailController extends HttpServlet{
 		topicdetails = topicDetailsDao.findTopicDetailByTopicId(Integer.parseInt(topicId));
 		if(!topicdetails.isEmpty())
 		{
-			if(topicdetails.get(0).getScores()!=-1)
+			if(topicdetails.get(0).getScores()<0)
 				req.setAttribute("topicdetail", topicdetails.get(0));
 		}
 		List<StudentsModel> students = new ArrayList<StudentsModel>();

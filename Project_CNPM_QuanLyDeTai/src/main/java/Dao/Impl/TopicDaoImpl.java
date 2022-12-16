@@ -1,8 +1,10 @@
 package Dao.Impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,17 +16,16 @@ public class TopicDaoImpl extends DBConnection implements ITopicDao{
 	@Override
 	public void insert(TopicModel topic) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO topic(topicName,gender,birth,email,phone) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO Topic(topicName,teacherId,detail,createAt) VALUES (?,?,?,?)";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
-			
-//			ps.setString(1, topic.gettopicName());
-//			ps.setBoolean(2, topic.getGender());
-//			ps.setDate(3, topic.getBirth());
-//			ps.setInt(6, topic.gettopicId());
-			
-			
+
+			ps.setString(1, topic.getTopicName());
+			ps.setInt(2, topic.getTeacherId());
+			ps.setString(3, topic.getDetail());
+			ps.setDate(4, Date.valueOf(LocalDate.now()));
+
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
