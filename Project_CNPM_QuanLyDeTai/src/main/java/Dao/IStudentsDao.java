@@ -18,6 +18,8 @@ public interface IStudentsDao {
 
 	List<StudentsModel> getAll();
 	
-	List<StudentsModel> getListSearh(String key);
+	List<StudentsModel> getListSearh(String key, int idPage);
+
+	StudentsModel findStudentByEmail(String email);
 
 }

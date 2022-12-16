@@ -1,5 +1,7 @@
 package Models;
 
+import java.sql.Date;
+
 public class TopicModel {
 	private int topicId;
 	
@@ -13,14 +15,29 @@ public class TopicModel {
 	private String teacherName;
 	private int count;
 
-	public TopicModel(int topicId, String topicName, int teacherId, String detail) {
+	private Date createAt;
+	private String link;
+	
+	
+	private int quantityRegister;
+
+	public TopicModel(int topicId, String topicName, int teacherId, String detail, Date createAt) {
 		super();
 		this.topicId = topicId;
 		this.topicName = topicName;
 		this.teacherId = teacherId;
 		this.detail = detail;
+		this.createAt=createAt;
 	}
-
+	public TopicModel(int topicId, String topicName, int teacherId, String detail, Date createAt, String link) {
+		super();
+		this.topicId = topicId;
+		this.topicName = topicName;
+		this.teacherId = teacherId;
+		this.detail = detail;
+		this.createAt = createAt;
+		this.link = link;
+	}
 	public TopicModel() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -72,6 +89,30 @@ public class TopicModel {
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public int getQuantityRegister() {
+		return quantityRegister;
+	}
+
+	public void setQuantityRegister(int quantityRegister) {
+		this.quantityRegister = quantityRegister;
 	}
 	
 	

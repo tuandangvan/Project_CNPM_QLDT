@@ -156,7 +156,8 @@ public class TopicDetailsDaoImpl extends DBConnection implements ITopicDetailsDa
 				topicdetail.setTopicId(rs.getInt("topicId"));
 				topicdetail.setStudentId(rs.getInt("studentId"));
 				topicdetail.setLeader(rs.getBoolean("leader"));
-				topicdetail.setScores(rs.getFloat("scores"));
+				if(rs.getString("scores")!=null)
+					topicdetail.setScores(rs.getFloat("scores"));
 				
 				topicdetails.add(topicdetail);
 				
@@ -169,9 +170,10 @@ public class TopicDetailsDaoImpl extends DBConnection implements ITopicDetailsDa
 	
 	@Override
 	public String findMajorNameByTopicDetail(int topicId) {
-		String sql = "select DISTINCT  Majors.majorName from Topic, TopicDetails, Students, Majors Where Topic.topicId=TopicDetails.topicId and TopicDetails.studentId=Students.studentId\r\n"
-				+ "and Students.majorId=Majors.majorId and TopicDetails.topicId=?";
-		List<TopicDetailsModel> topicdetails = new ArrayList<TopicDetailsModel>();
+		String sql = "select DISTINCT  Majors.majorName \r\n"
+				+ "from Topic, Teachers, Majors \r\n"
+				+ "Where topic.teacherId=Teachers.teacherId and Teachers.majorId=Majors.majorId and Topic.topicId=?";
+//		List<TopicDetailsModel> topicdetails = new ArrayList<TopicDetailsModel>();
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -184,5 +186,38 @@ public class TopicDetailsDaoImpl extends DBConnection implements ITopicDetailsDa
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@Override
+	public void insertLeader(TopicDetailsModel topicdetail) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO topicDetails(topicId, studentId, leader, scores) VALUES (?,?,1,-1)";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, topicdetail.getTopicId());
+			ps.setInt(2, topicdetail.getStudentId());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	@Override
+	public void insertMenber(TopicDetailsModel topicdetail) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO topicDetails(topicId, studentId, leader, scores) VALUES (?,?,0,-1)";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, topicdetail.getTopicId());
+			ps.setInt(2, topicdetail.getStudentId());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 }

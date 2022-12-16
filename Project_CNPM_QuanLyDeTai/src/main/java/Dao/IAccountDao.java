@@ -12,7 +12,7 @@ public interface IAccountDao {
 
 	void delete(int id);
 
-	AccountModel get(int id);
+	AccountModel get(String username);
 
 	AccountModel findById(int id);
 

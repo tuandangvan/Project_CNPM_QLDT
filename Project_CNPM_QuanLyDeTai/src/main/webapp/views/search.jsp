@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:url value="/home" var="link"></c:url>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,11 +11,17 @@
 </head>
 <body>
 	<script>
-$(document).ready(function () {
-    $("#${panel}").show();
-});
-</script>
-
+		$(document).ready(function() {
+			$("#${panel}").show();
+		});
+	</script>
+	<script>
+	function getlink(){
+		var linknow = location.href;
+		return linknow;
+	}
+		
+	</script>
 	<div class="panel panel-default" id="timkiemsinhvien"
 		style="display: none">
 		<div style="color: rgb(7, 132, 163);" class="panel-heading">
@@ -54,16 +59,24 @@ $(document).ready(function () {
 					</c:forEach>
 				</tbody>
 				<tfoot>
+				<tfoot>
 					<tr>
 						<td colspan="5">
 							<div class="pagination pagination-centered">
 								<div class="pagination-container">
-									<ul class="pagination"></ul>
+									<ul class="pagination pagination-lg">
+										<c:forEach var="i" begin="1" end="${amountPage.page }">
+											<li class="page-item"><a class="page-link"
+												href="${linkz }&page=${i}">${i} ${link }</a></li>
+											<li>
+										</c:forEach>
+									</ul>
 								</div>
 							</div>
 						</td>
 					</tr>
 				</tfoot>
+
 			</table>
 		</div>
 	</div>
@@ -81,7 +94,7 @@ $(document).ready(function () {
 				data-page-size="5">
 				<thead>
 					<tr>
-						
+
 						<th data="true">Họ Tên</th>
 						<th data-hide="phone" class="footable-last-column">Số Điện
 							Thoại</th>
@@ -94,7 +107,7 @@ $(document).ready(function () {
 				<tbody>
 					<c:forEach items="${tea}" var="tea">
 						<tr>
-							
+
 							<td>${tea.teacherName}</td>
 							<td>${tea.phone}</td>
 							<td>${tea.email}</td>
@@ -104,11 +117,17 @@ $(document).ready(function () {
 					</c:forEach>
 				</tbody>
 				<tfoot>
-					<tr>
+				<tr>
 						<td colspan="5">
 							<div class="pagination pagination-centered">
 								<div class="pagination-container">
-									<ul class="pagination"></ul>
+									<ul class="pagination pagination-lg">
+										<c:forEach var="i" begin="1" end="${amountPage.page }">
+											<li class="page-item"><a class="page-link"
+												href="${linkz }&page=${i}">${i} ${link }</a></li>
+											<li>
+										</c:forEach>
+									</ul>
 								</div>
 							</div>
 						</td>
@@ -117,7 +136,8 @@ $(document).ready(function () {
 			</table>
 		</div>
 	</div>
-	<div class="panel panel-default" id="timkiemdetai" style="display: none">
+	<div class="panel panel-default" id="timkiemdetai"
+		style="display: none">
 		<div style="color: rgb(7, 132, 163);" class="panel-heading">
 			<h4 style="font-family: verdana; color: rgb(87, 87, 87);">Đề tài</h4>
 		</div>
@@ -156,10 +176,16 @@ $(document).ready(function () {
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="6">
+						<td colspan="5">
 							<div class="pagination pagination-centered">
 								<div class="pagination-container">
-									<ul class="pagination"></ul>
+									<ul class="pagination pagination-lg">
+										<c:forEach var="i" begin="1" end="${amountPage.page }">
+											<li class="page-item"><a class="page-link"
+												href="${linkz }&page=${i}">${i} ${link }</a></li>
+											<li>
+										</c:forEach>
+									</ul>
 								</div>
 							</div>
 						</td>

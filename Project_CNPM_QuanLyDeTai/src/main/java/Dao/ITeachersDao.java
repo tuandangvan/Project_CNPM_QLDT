@@ -18,6 +18,10 @@ public interface ITeachersDao {
 
 	TeachersModel findById(int id);
 	
-	List<TeachersModel> getListSearh(String key);
+	List<TeachersModel> getListSearh(String key , int idPage);
+
+	TeachersModel getByUser(String user);
+
+	List<TeachersModel> getAllTeacherCouncil(int teacherId);
 
 }

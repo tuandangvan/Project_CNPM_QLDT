@@ -148,19 +148,24 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 	}
 	
 	
-	public List<StudentsModel> getListSearh(String key) {
+	public List<StudentsModel> getListSearh(String key, int idPage) {
 		List<StudentsModel> students= new ArrayList<StudentsModel>();
 		String sql = "DECLARE @value nvarchar(50)\r\n"
-				+ "set @value= N'%" + key +"%'\r\n"
-				+ "select Students.studentId, Students.studentName, Students.phone, Students.email,\r\n"
+				+ "set @value= N'%"+key+"%'\r\n"
+				+ "select distinct Students.studentId, Students.studentName, Students.phone, Students.email,\r\n"
 				+ "(select Majors.majorName from Majors where Majors.majorId = Students.majorId) as majorName,\r\n"
-				+ "(select Topic.topicName from Topic, TopicDetails \r\n"
+				+ "(select Topic.topicName from Topic, TopicDetails\r\n"
 				+ "where TopicDetails.studentId = Students.studentId and TopicDetails.topicId=Topic.topicId) as topicName\r\n"
-				+ "from Students\r\n"
-				+ "where Students.studentName like @value or Students.studentId  like @value or Students.phone  like @value";
+				+ "from Students, Majors\r\n"
+				+ "where Students.studentName like @value or Students.studentId  like @value \r\n"
+				+ "or Students.phone  like @value or majorName  like @value\r\n"
+				+ "ORDER BY Students.studentId\r\n"
+				+ "OFFSET (?-1)*10 ROWS\r\n"
+				+ "FETCH FIRST 10 ROWS ONLY";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, idPage);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				StudentsModel student = new StudentsModel();
@@ -181,4 +186,30 @@ public class StudentsDaoImpl extends DBConnection implements IStudentsDao{
 		}
 		return students;
 	}
+
+	@Override
+	public StudentsModel findStudentByEmail(String email) {
+		String sql = "SELECT * FROM students WHERE email = ? ";
+		try {
+			Connection conn = super.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				StudentsModel student = new StudentsModel(
+						rs.getInt(1),
+						rs.getString(2),
+						rs.getBoolean(3),
+						rs.getDate(4),
+						rs.getString(5),
+						rs.getString(6),
+						rs.getString(7),
+						rs.getInt(8));
+				return student;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
+	

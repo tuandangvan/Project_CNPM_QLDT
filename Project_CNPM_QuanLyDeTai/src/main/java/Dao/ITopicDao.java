@@ -18,7 +18,14 @@ public interface ITopicDao {
 
 	TopicModel findById(int id);
 
-	List<TopicModel> getListSearh(String key);
+	List<TopicModel> getListSearh(String key, int pageid);
 	
+
+	List<TopicModel> findTopicByEmail(String email);
+
+	List<TopicModel> getAllByTeacher(int teacherId);
+
+	TopicModel getById(int id);
+
 
 }

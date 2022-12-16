@@ -1,6 +1,7 @@
 package Dao.Impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -85,6 +86,19 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 				signup.setyStart(rs.getInt("yStart"));
 				signup.setmStart(rs.getInt("mStart"));				
 				return signup;
+//				SignUpModel signup = new SignUpModel();
+//				signup.setSignUpId(rs.getInt("signupId"));
+//				signup.setStartTime(rs.getTimestamp("startTime"));
+//				signup.setEndTime(rs.getTimestamp("endTime"));
+//				signup.setRole(rs.getBoolean("role"));
+//				signup.setdEnd(rs.getInt("dEnd"));
+//				signup.setyEnd(rs.getInt("yEnd"));
+//				signup.setmEnd(rs.getInt("mEnd"));
+//				signup.setdStart(rs.getInt("dStart"));
+//				signup.setyStart(rs.getInt("yStart"));
+//				signup.setmStart(rs.getInt("mStart"));
+				
+//				return signup;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -124,7 +138,6 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 //				
 //				signups.add(signup);
 				SignUpModel signup = new SignUpModel();
-				
 				signup.setSignUpId(rs.getInt("signupId"));
 				signup.setStartTime(rs.getDate("startTime"));
 				signup.setEndTime(rs.getDate("endTime"));
@@ -212,11 +225,32 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 				signup.setyStart(rs.getInt("yStart"));
 				signup.setmStart(rs.getInt("mStart"));
 				return signup;
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	@Override
+	public SignUpModel getLast() {
+		SignUpModel signup = null;
+		String sql = "SELECT Top 1 * FROM signup ORDER BY signUpId DESC ";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				int signUpId = rs.getInt("signUpId");
+				Date startTime= rs.getDate("startTime");
+				Date endTime = rs.getDate("endTime");
+				Boolean role = rs.getBoolean("role");
+				signup = new SignUpModel(signUpId,startTime,endTime,role);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return signup;
 	}
 	
 }

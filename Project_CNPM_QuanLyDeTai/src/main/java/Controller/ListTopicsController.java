@@ -19,7 +19,7 @@ import Models.SignUpModel;
 import Models.TopicModel;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = {"/home/loaidetai"})
+@WebServlet(urlPatterns = {"/list-topic","/admin/list-topic","/student/list-topic","/teacher/list-topic"})
 public class ListTopicsController extends HttpServlet{
 	
 	ISignUpDao signUp = new SignUpDaoImpl();

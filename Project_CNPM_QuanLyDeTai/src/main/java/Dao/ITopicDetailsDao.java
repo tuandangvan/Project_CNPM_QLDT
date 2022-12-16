@@ -22,4 +22,8 @@ public interface ITopicDetailsDao {
 
 	String findMajorNameByTopicDetail(int topicId);
 
+	void insertLeader(TopicDetailsModel topicdetail);
+
+	void insertMenber(TopicDetailsModel topicdetail);
+
 }

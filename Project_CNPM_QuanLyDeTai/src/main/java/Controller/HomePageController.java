@@ -15,7 +15,7 @@ import Dao.Impl.SignUpDaoImpl;
 import Models.SignUpModel;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = {"/home"})
+@WebServlet(urlPatterns = {"/home","/student/home","/teacher/home","/admin/home"})
 public class HomePageController extends HttpServlet{
 	
 	ISignUpDao signUp = new SignUpDaoImpl();
