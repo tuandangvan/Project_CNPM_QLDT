@@ -70,12 +70,17 @@ public class TopicStudentController extends HttpServlet {
 					}
 				}
 
-//		List<TopicModel> topics = new ArrayList<TopicModel>();
-//		topics = topicDao.getAll();
 				req.setAttribute("topics", topics);
 				RequestDispatcher dispatcher = req.getRequestDispatcher("/views/sinhvien/list-topics-register.jsp");
 				dispatcher.forward(req, resp);
 			}
+			else {
+				req.setAttribute("message", "Không nằm trong thời gian đăng ký");
+				req.getRequestDispatcher("/views/teacher/error.jsp").forward(req,resp);
+			}
+		}else {
+			req.setAttribute("message", "Không nằm trong thời gian đăng ký");
+			req.getRequestDispatcher("/views/teacher/error.jsp").forward(req,resp);
 		}
 	}
 
