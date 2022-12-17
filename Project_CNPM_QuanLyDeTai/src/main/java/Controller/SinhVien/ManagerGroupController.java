@@ -41,68 +41,71 @@ public class ManagerGroupController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		HttpSession session = req.getSession();
-		if (session != null && session.getAttribute("account") != null) {
-			AccountModel account = (AccountModel) session.getAttribute("account");
-			// lấy topicId theo email
-			String topicId = studentsDao.findTopicIdByEmail(account.getUsername());
+		try {
+			HttpSession session = req.getSession();
+			if (session != null && session.getAttribute("account") != null) {
+				AccountModel account = (AccountModel) session.getAttribute("account");
+				// lấy topicId theo email
+				String topicId = studentsDao.findTopicIdByEmail(account.getUsername());
 
-			// tìm dề tài
-			TopicModel topic = new TopicModel();
-			topic = topicDao.findById(Integer.parseInt(topicId));
-			req.setAttribute("topic", topic);
+				// tìm dề tài
+				TopicModel topic = new TopicModel();
+				topic = topicDao.findById(Integer.parseInt(topicId));
+				req.setAttribute("topic", topic);
 
-			// tìm topicdetail theo topicId và leader
-			List<TopicDetailsModel> topicdetails = new ArrayList<TopicDetailsModel>();
-			topicdetails = topicDetailsDao.findTopicDetailByTopicId(Integer.parseInt(topicId));
-			if (!topicdetails.isEmpty()) {
-				if (topicdetails.get(0).getScores() >= 0)
-					req.setAttribute("topicdetail", topicdetails.get(0));
-			}
-			List<StudentsModel> students = new ArrayList<StudentsModel>();
-
-			for (TopicDetailsModel topicDetail : topicdetails) {
-				// lấy leader thành viên
-				StudentsModel sd = new StudentsModel();
-				sd = studentsDao.findById(topicDetail.getStudentId());
-				students.add(sd);
-			}
-
-			int sl = students.size();
-			req.setAttribute("sl", sl);
-
-			req.setAttribute("students", students);
-
-			String majorName = topicDetailsDao.findMajorNameByTopicDetail(Integer.parseInt(topicId));
-			req.setAttribute("majorName", majorName);
-
-			// lấy leader thành viên
-			StudentsModel leader = null;
-			for (TopicDetailsModel tp : topicdetails) {
-				if (tp.getLeader()) {
-					leader = new StudentsModel();
-					leader = studentsDao.findById(tp.getStudentId());
-					req.setAttribute("leader", leader);
-					break;
+				// tìm topicdetail theo topicId và leader
+				List<TopicDetailsModel> topicdetails = new ArrayList<TopicDetailsModel>();
+				topicdetails = topicDetailsDao.findTopicDetailByTopicId(Integer.parseInt(topicId));
+				if (!topicdetails.isEmpty()) {
+					if (topicdetails.get(0).getScores() >= 0)
+						req.setAttribute("topicdetail", topicdetails.get(0));
 				}
+				List<StudentsModel> students = new ArrayList<StudentsModel>();
+
+				for (TopicDetailsModel topicDetail : topicdetails) {
+					// lấy leader thành viên
+					StudentsModel sd = new StudentsModel();
+					sd = studentsDao.findById(topicDetail.getStudentId());
+					students.add(sd);
+				}
+
+				int sl = students.size();
+				req.setAttribute("sl", sl);
+
+				req.setAttribute("students", students);
+
+				String majorName = topicDetailsDao.findMajorNameByTopicDetail(Integer.parseInt(topicId));
+				req.setAttribute("majorName", majorName);
+
+				// lấy leader thành viên
+				StudentsModel leader = null;
+				for (TopicDetailsModel tp : topicdetails) {
+					if (tp.getLeader()) {
+						leader = new StudentsModel();
+						leader = studentsDao.findById(tp.getStudentId());
+						req.setAttribute("leader", leader);
+						break;
+					}
+				}
+
+				if (leader.getEmail().equals(account.getUsername())) {
+					req.setAttribute("isleader", 1);
+				}
+
+				// lấy thành viên
+
+				// lấy giảng viên hd
+				TeachersModel teacherIn = new TeachersModel();
+				teacherIn = teachersDao.findById(topic.getTeacherId());
+				req.setAttribute("teacherIn", teacherIn);
+
+				// lay gv phan bien
+				List<TeachersModel> teacherPbs = new ArrayList<TeachersModel>();
+				teacherPbs = teachersDao.getAllTeacherByTopicId(Integer.parseInt(topicId));
+				req.setAttribute("teacherPbs", teacherPbs);
 			}
-
-			if (leader.getEmail().equals(account.getUsername())) {
-				req.setAttribute("isleader", 1);
-			}
-
-			// lấy thành viên
-
-			// lấy giảng viên hd
-			TeachersModel teacherIn = new TeachersModel();
-			teacherIn = teachersDao.findById(topic.getTeacherId());
-			req.setAttribute("teacherIn", teacherIn);
-
-
-			// lay gv phan bien
-			List<TeachersModel> teacherPbs = new ArrayList<TeachersModel>();
-			teacherPbs = teachersDao.getAllTeacherByTopicId(Integer.parseInt(topicId));
-			req.setAttribute("teacherPbs", teacherPbs);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/views/sinhvien/group-manager.jsp");

@@ -170,4 +170,27 @@ public class CouncilDaoImpl extends DBConnection implements ICouncilDao{
 		return null;
 	}
 	
+	@Override
+	public CouncilModel getByTopicId(int topicId) {
+		String sql = "select * from Council where topicId = ? ";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, topicId);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				CouncilModel counciler = new CouncilModel();
+
+				counciler.setId(rs.getInt("id"));
+				counciler.setTopicId(rs.getInt("topicId"));
+				counciler.setAverageScore(rs.getFloat("averageScore"));
+				return counciler;
+			}			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
 }

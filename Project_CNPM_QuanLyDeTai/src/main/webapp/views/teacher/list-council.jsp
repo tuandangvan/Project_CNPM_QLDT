@@ -21,11 +21,14 @@
 			<c:forEach var="counCil" items="${listCouncil}">
 				<tr>
 					<td>${iTopicDao.getById(counCil.topicId).topicName}</td>
-					<td>${counCil.averageScore<0 ? "Chưa chấm điểm" : counCil.averageScore}</td>
+					<td>
+					<c:if test="${counCil.averageScore<0}">Chưa có điểm</c:if> 
+					<c:if test="${counCil.averageScore>=0}">${counCil.averageScore}</c:if>
+					 </td>
 					<td><c:forEach items="${iCouncilDetailsDao.getAllByCouncilId(counCil.id)}" var="item">
 						${iTeachersDao.findById(item.teacherId).teacherName}<br>
 					</c:forEach></td>
-					<td><a>Chấm điểm</a></td>
+					<td><a href="./mark?id=${counCil.topicId}">Chấm điểm</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

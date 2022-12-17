@@ -6,7 +6,7 @@
 		<ul class="list-unstyled">
 			
 			<c:forEach items="${signs}" var="signs">
-			<a href="./home/TinTuGiaoVu?id=${signs.yEnd }">
+			<a href="./TinTuGiaoVu?id=${signs.signUpId }">
 				<li class="article-area">
 					<p>
 						<span class="btn btn-primary btn-sm"> ${signs.startTime} </span>

@@ -22,4 +22,6 @@ public interface ICouncilDao {
 
 	CouncilModel getById(int id);
 
+	CouncilModel getByTopicId(int topicId);
+
 }

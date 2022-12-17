@@ -100,7 +100,6 @@
 						<th data-hide="phone" class="footable-last-column">Email</th>
 						<th data-hide="phone" class="footable-last-column">Chuyên
 							Ngành</th>
-						<th data-hide="phone" class="footable-last-column">Tên Đề Tài</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -111,7 +110,6 @@
 							<td>${tea.phone}</td>
 							<td>${tea.email}</td>
 							<td>${tea.majorName}</td>
-							<td>${tea.topicName}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -174,7 +172,7 @@
 					</c:forEach>
 				</tbody>
 				<tfoot>
-					<tr>
+						<tr>
 						<td colspan="5">
 							<div class="pagination pagination-centered">
 								<div class="pagination-container">

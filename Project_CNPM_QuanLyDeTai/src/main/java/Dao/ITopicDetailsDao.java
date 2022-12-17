@@ -26,4 +26,6 @@ public interface ITopicDetailsDao {
 
 	void insertMenber(TopicDetailsModel topicdetail);
 
+	List<TopicDetailsModel> getAllByTopicId(int topicId);
+
 }

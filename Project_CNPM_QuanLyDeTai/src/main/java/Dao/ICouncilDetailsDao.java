@@ -25,5 +25,10 @@ public interface ICouncilDetailsDao {
 	List<CouncilDetailsModel> getAllByTeacher(int teacherId);
 
 	List<CouncilDetailsModel> getAllByCouncilId(int councilId);
+	
+	void updateScoresCounCilDetail(float scores, int councilId, int teacherId,int topicId);
+
+	Float findScoresByTeacherIdAndCouncilId(int topicId, String email);
+
 
 }

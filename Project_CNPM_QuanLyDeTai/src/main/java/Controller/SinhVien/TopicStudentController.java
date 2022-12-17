@@ -47,7 +47,7 @@ public class TopicStudentController extends HttpServlet {
 
 		if ((now.compareTo(signUpModel.getStartTime()) > 0 || now.compareTo(signUpModel.getStartTime()) == 0)
 				&& (now.compareTo(signUpModel.getEndTime()) < 0 || now.compareTo(signUpModel.getEndTime()) == 0)) {
-			if (signUpModel.getRole() == true) {
+			if (signUpModel.getRole() == false) {
 				HttpSession session = req.getSession();
 				if (session != null && session.getAttribute("account") != null) {
 					AccountModel account = (AccountModel) session.getAttribute("account");
