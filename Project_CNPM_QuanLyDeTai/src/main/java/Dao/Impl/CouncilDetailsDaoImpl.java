@@ -8,7 +8,9 @@ import java.util.List;
 
 import Connection.DBConnection;
 import Dao.ICouncilDetailsDao;
+import Dao.ITopicDetailsDao;
 import Models.CouncilDetailsModel;
+import Models.TopicDetailsModel;
 
 public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetailsDao {
 	@Override
@@ -229,6 +231,141 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 		}
 		return councildetailers;
 	}
+	
+	public void updateScoresCounCilDetail(float scores, int councilId, int teacherId,int topicId) {
+		String sql = "UPDATE CouncilDetails SET scores=? WHERE councilId=? and teacherId=?";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setFloat(1, scores);
+			ps.setInt(2, councilId);
+			ps.setInt(3, teacherId);
+			ps.executeUpdate();
+			
+			updateScoresCounCil(councilId,topicId);
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void updateScoresCounCil(int councilId,int topicId) {
+		String sql = "UPDATE Council SET averagescore=? WHERE id=?";
+		try {
+			float averageScore = getAverageScore(councilId);
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setFloat(1,averageScore);
+			ps.setInt(2, councilId);
+			ps.executeUpdate();
+			
+			if(averageScore>=0)
+				updateTopicDetail(topicId,averageScore);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateTopicDetail(int topicId, float scores) {
+		ITopicDetailsDao topicDetailDAO = new TopicDetailsDaoImpl();
+		List<TopicDetailsModel> topicDetailsModels = topicDetailDAO.getAllByTopicId(topicId);
+		for (TopicDetailsModel topicDetail: topicDetailsModels
+			 ) {
+
+			topicDetail.setScores(scores);
+			topicDetailDAO.edit(topicDetail);
+		}
+	}
+
+	public int getCount(int councilId) {
+		String sql = "Select Count(CouncilId) as count from CouncilDetails where CouncilId = ? and Scores>0";
+		int count =0;
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, councilId);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				count = rs.getInt("count");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(count==0)
+			return 1;
+		return count;
+	}
+
+	public float getAverageScore(int CouncilId) {
+		if(checkScore(CouncilId)==1)
+			return -1;
+		else {
+			String sql = "Select Sum(Scores) as sum from CouncilDetails where CouncilId =? and Scores>0";
+			float sum = -1;
+			try {
+				Connection con = super.getConnection();
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1,CouncilId);
+				
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+					sum = rs.getFloat("sum");
+				}
+				
+				return sum/getCount(CouncilId);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return sum;
+		}
+	}
+
+	public int checkScore(int councilId) {
+		String sql = "Select Count(CouncilId) as count from CouncilDetails where CouncilId =? and Scores<0";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, councilId);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				int count = rs.getInt("count");
+				if (count == 0)
+					return -1;
+				return 1;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	@Override
+	public Float findScoresByTeacherIdAndCouncilId(int topicId, String email) {
+		String sql = "select CouncilDetails.Scores from CouncilDetails, Teachers, Council, Topic\r\n"
+				+ "where CouncilDetails.teacherId=Teachers.teacherId and  CouncilDetails.CouncilId=Council.id\r\n"
+				+ "and Topic.topicId=Council.topicId and Topic.topicId=? and Teachers.email=?";
+		try {
+			Connection con = super.getConnection();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, topicId);
+			ps.setString(2, email);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				return rs.getFloat("scores");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	
 	
 }

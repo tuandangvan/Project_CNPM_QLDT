@@ -27,7 +27,7 @@ import Models.TeachersModel;
 import Models.TopicModel;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = {"/search", "/student/search"})
+@WebServlet(urlPatterns = {"/search", "/student/search", "/teacher/search"})
 public class SearchController extends HttpServlet{
 	
 	ISignUpDao signUp = new SignUpDaoImpl();
@@ -52,6 +52,7 @@ public class SearchController extends HttpServlet{
 		
 		req.setAttribute("panel",panel);
 		String key = req.getParameter("param_textbox");
+		
 		if(panel.equals("timkiemsinhvien"))
 		{
 			PageModel amountPage = page.PageStudent(key);
@@ -64,6 +65,7 @@ public class SearchController extends HttpServlet{
 		else if(panel.equals("timkiemgiangvien"))
 		{
 			PageModel amountPage = page.PageTeacher(key);
+			
 			req.setAttribute("amountPage",amountPage);
 			List<TeachersModel> tea = teachers.getListSearh(key,pageid);
 			req.setAttribute("tea",tea);

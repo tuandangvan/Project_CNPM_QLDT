@@ -66,8 +66,7 @@ public class SignUpDaoImpl extends DBConnection implements ISignUpDao{
 				+ "YEAR(startTime) as yStart, MONTH(startTime) as mStart, DAY(startTime) as dStart,\r\n"
 				+ "YEAR(endTime) as yEnd, MONTH(endTime) as mEnd, DAY(endTime) as dEnd\r\n"
 				+ "from SignUp\r\n"
-				+ "where signUpId=?\r\n"
-				+ "ORDER BY SignUp.startTime desc ";
+				+ "where signUpId=?";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);

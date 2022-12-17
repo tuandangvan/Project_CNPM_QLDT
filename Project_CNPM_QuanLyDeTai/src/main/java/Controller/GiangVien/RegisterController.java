@@ -55,7 +55,7 @@ public class RegisterController extends HttpServlet {
 		Date now = Date.valueOf(LocalDate.now());
 		if ((now.compareTo(signUpModel.getStartTime()) > 0 || now.compareTo(signUpModel.getStartTime()) == 0)
 				&& (now.compareTo(signUpModel.getEndTime()) < 0 || now.compareTo(signUpModel.getEndTime()) == 0)) {
-			if (signUpModel.getRole() == false) {
+			if (signUpModel.getRole() == true) {
 				HttpSession session = request.getSession();
 				if (session != null && session.getAttribute("account") != null) {
 					AccountModel account = (AccountModel) session.getAttribute("account");

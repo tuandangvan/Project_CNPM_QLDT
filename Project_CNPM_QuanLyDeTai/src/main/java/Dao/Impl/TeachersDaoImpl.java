@@ -152,8 +152,7 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao {
 		String sql = "DECLARE @value nvarchar(50)\r\n" 
 				+ "set @value= N'%" + key + "%'\r\n"
 				+ "select distinct Teachers.teacherId, Teachers.teacherName, Teachers.phone, Teachers.email,\r\n"
-				+ "(select Majors.majorName from Majors where Majors.majorId = Teachers.majorId) as majorName,\r\n"
-				+ "(select Topic.topicName from Topic  where Teachers.teacherId = Topic.teacherId) as topicName\r\n"
+				+ "(select Majors.majorName from Majors where Majors.majorId = Teachers.majorId) as majorName\r\n"
 				+ "from Teachers\r\n" + "where Teachers.teacherName like @value \r\n"
 				+ "or Teachers.teacherId like @value \r\n" + "or Teachers.phone  like @value\r\n"
 				+ "or Teachers.email  like @value\r\n"
@@ -173,7 +172,6 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao {
 				teacher.setPhone(rs.getString("phone"));
 				teacher.setEmail(rs.getString("email"));
 
-				teacher.setTopicName(rs.getString("topicName"));
 				teacher.setMajorName(rs.getString("majorName"));
 
 			
@@ -200,7 +198,6 @@ public class TeachersDaoImpl extends DBConnection implements ITeachersDao {
 				String teacherName = rs.getString("teacherName");
 				Boolean gender = rs.getBoolean("gender");
 				Date birth = rs.getDate("birth");
-				;
 				String email = rs.getString("email");
 				String phone = rs.getString("phone");
 				int majorId = rs.getInt("majorId");
