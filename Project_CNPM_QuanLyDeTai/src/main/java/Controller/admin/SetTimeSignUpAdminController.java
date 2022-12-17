@@ -31,16 +31,36 @@ public class SetTimeSignUpAdminController extends HttpServlet{
 			resp.setContentType("text/html");
 			req.setCharacterEncoding("UTF-8");
 			
-			SignUpModel signUp = new SignUpModel();
-			signUp.setStartTime(Date.valueOf(req.getParameter("start")));
-			signUp.setEndTime(Date.valueOf(req.getParameter("end")));
-			signUp.setRole(Boolean.parseBoolean(req.getParameter("role")));
+			SignUpModel signUpModel = signUpDao.getLast();
 			
-			signUpDao.insert(signUp);
+			Date start = (Date.valueOf(req.getParameter("start")));
+			Date now = Date.valueOf(LocalDate.now());
+			
+			if(signUpModel==null)
+			{		
+				SignUpModel signUp = new SignUpModel();
+				signUp.setStartTime(Date.valueOf(req.getParameter("start")));
+				signUp.setEndTime(Date.valueOf(req.getParameter("end")));
+				signUp.setRole(Boolean.parseBoolean(req.getParameter("role")));
+				signUpDao.insert(signUp);
+			}
+			else if((start.compareTo(signUpModel.getEndTime())>0)) {
+				
+				SignUpModel signUp = new SignUpModel();
+				signUp.setStartTime(Date.valueOf(req.getParameter("start")));
+				signUp.setEndTime(Date.valueOf(req.getParameter("end")));
+				signUp.setRole(Boolean.parseBoolean(req.getParameter("role")));
+				signUpDao.insert(signUp);
+			}else {
+				System.out.println("Không nằm trong thời gian đăng ký");
+			}
+			
+			
+			
 			
 			resp.sendRedirect(req.getContextPath() + "/admin/singUp/add");
 		} catch (Exception e) {
-			e.printStackTrace();
+			resp.sendRedirect(req.getContextPath() + "/admin/singUp/add");
 		}
 	}
 

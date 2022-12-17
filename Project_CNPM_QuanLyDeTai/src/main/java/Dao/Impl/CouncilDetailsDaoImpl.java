@@ -17,7 +17,7 @@ public class CouncilDetailsDaoImpl extends DBConnection implements ICouncilDetai
 	public void insert(CouncilDetailsModel councildetail) {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO CouncilDetails(CouncilId, teacherId) VALUES (?,?)";
+		String sql = "INSERT INTO CouncilDetails(CouncilId, teacherId, scores) VALUES (?,?,-1)";
 		try {
 			Connection con = super.getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
